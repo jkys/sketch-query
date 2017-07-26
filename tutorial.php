@@ -142,6 +142,7 @@
 			<img class="icon" id="add-item-tx" src="img/tx.png">
 			<img class="icon" id="add-item-sq" src="img/sq.png">
 			<img class="icon" id="add-item-c" src="img/c.png">
+            <img class="icon" type = "file" id="add-item-img" src="img/img.png">
 			<img class="icon" id="rm-item" src="img/tr.png">
             <input id = "create-code-btn" type="button" value="Create" onclick="CreateCode();" />
 		</div>
@@ -304,6 +305,33 @@
         addItem(item);
         
     });
+
+    $('#add-item-img').click(function() {
+      
+
+        var imageObj = new Image();
+
+       imageObj.src = '/img/p1.png';
+
+        imageObj.onload = function() {    
+
+
+            var item = new Konva.Image({
+            x: 50,
+            y: 50,
+            image: imageObj,
+            width: 106,
+            height: 118,
+            draggable: true
+            });
+        
+                addItem(item);  
+         };
+
+
+
+    });
+
 
     function addItem(item) {
         layer.add(item);
