@@ -143,6 +143,7 @@
 			<img class="icon" id="add-item-sq" src="img/sq.png">
 			<img class="icon" id="add-item-c" src="img/c.png">
 			<img class="icon" id="rm-item" src="img/tr.png">
+            <input id = "create-code-btn" type="button" value="Create" onclick="CreateCode();" />
 		</div>
 		<div class="section" id="container"></div>
 </div>
@@ -170,6 +171,8 @@
 </script>
 <script type="text/javascript">
 	var item_count = 0;
+
+    var object_array = [];
     
     $('#add-item-sq').click(function() {    	
         var item = new Konva.Rect({
@@ -205,6 +208,65 @@
         addItem(item);
         
     });
+
+    function CreateCode(){
+
+        //var obj = new Object();
+
+
+        
+
+        for( var i =0; i < stage.children[0].children.length; i ++){
+
+            // initialize object
+
+            
+            var obj = new Object();
+
+            obj.id = null;
+            obj.type = null;
+            obj.x = null;
+            obj.y = null;
+            obj.text = null;     
+
+
+
+            console.log(stage.children[0].children[i]);
+            console.log("Type: " + stage.children[0].children[i].className);
+            console.log("id: " + stage.children[0].children[i].attrs.id);
+            console.log("X: " + stage.children[0].children[i].attrs.x);
+            console.log("Y: " + stage.children[0].children[i].attrs.y);
+
+
+
+            obj.id = stage.children[0].children[i].attrs.id;
+            obj.type = stage.children[0].children[i].className;
+            obj.x = stage.children[0].children[i].attrs.x;
+            obj.y = stage.children[0].children[i].attrs.y;
+
+
+
+            if(stage.children[0].children[i].attrs.text){
+
+                console.log("text?: " + stage.children[0].children[i].attrs.text);
+
+                obj.text = stage.children[0].children[i].attrs.text;
+            }
+
+            else {
+                console.log("text?: null");
+            }
+
+            object_array[i] = obj; 
+
+        }
+
+        for(var i = 0; i < object_array.length; i ++){
+
+            console.log(object_array[i]);
+        }
+
+    }
 
     function updateThis() {
         var height = $('#updateHeight').val();
