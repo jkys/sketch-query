@@ -212,10 +212,6 @@
 
     function CreateCode(){
 
-        //var obj = new Object();
-
-
-        
 
         for( var i =0; i < stage.children[0].children.length; i ++){
 
@@ -228,7 +224,10 @@
             obj.type = null;
             obj.x = null;
             obj.y = null;
-            obj.text = null;     
+            obj.text = null;
+            obj.img = null;
+            obj.width = null;
+            obj.height = null;      
 
 
 
@@ -240,34 +239,132 @@
 
 
 
-            obj.id = stage.children[0].children[i].attrs.id;
+            
             obj.type = stage.children[0].children[i].className;
             obj.x = stage.children[0].children[i].attrs.x;
             obj.y = stage.children[0].children[i].attrs.y;
+            obj.width = stage.children[0].children[i].attrs.width;
+            obj.height = stage.children[0].children[i].attrs.height;
 
 
 
-            if(stage.children[0].children[i].attrs.text){
+            if(obj.type == 'Text'){
 
                 console.log("text?: " + stage.children[0].children[i].attrs.text);
+
+                obj.id = stage.children[0].children[i].attrs.id;
 
                 obj.text = stage.children[0].children[i].attrs.text;
             }
 
-            else {
-                console.log("text?: null");
+            else if (obj.type == 'Image'){
+                console.log("img src = " + stage.children[0].children[i].attrs.image.attributes[0].value);
+                obj.img = stage.children[0].children[i].attrs.image.attributes[0].value;
+                obj.id = stage.children[0].children[i].index;
+            }
+            else{
+                console.log("test")
             }
 
             object_array[i] = obj; 
 
         }
 
+        createHTML(object_array);
+        createCSS(object_array);
+
+      
+
+    }
+
+
+    function createHTML(object_array){
+
+        var str = '';
+
+
+        str += '<!DOCTYPE html><html><head><link rel="stylesheet" href="css.css"><title>Page Title</title></head><body>';
+
         for(var i = 0; i < object_array.length; i ++){
 
             console.log(object_array[i]);
+
+            if(object_array[i].type == 'Text'){
+
+                str+= '<p id = a' + object_array[i].id +'>' + object_array[i].text + '</p>'
+
+            }
+            else if (object_array[i].type == 'Image'){
+
+                str+= '<img id = a' + object_array[i].id + ' src=' + object_array[i].img + '>'
+
+            }
         }
 
+        str += '</body></html>';
+
+        uriContent = "data:application/octet-stream," + encodeURIComponent(str);
+
+        newWindow = window.open(uriContent, 'home.html');
+
+        console.log(str);
+
     }
+
+    function createCSS(object_array){
+
+        var str = '';
+
+        str += 'body {background-color: linen;}'
+
+        for(var i = 0; i < object_array.length; i ++){
+
+            if(object_array[i].type == 'Text'){
+
+                str+= '#a' + object_array[i].id + '{'; 
+
+                str+= 'position: relative; display: block; left: ' + object_array[i].x + '; top: ' + object_array[i].y + ';}'
+
+            }
+            else if (object_array[i].type == 'Image'){
+
+                str+= '#a' + object_array[i].id + '{'; 
+                str+= 'position: relative; left: ' + object_array[i].x + '; top: ' + object_array[i].y + ';}'
+
+            }
+        }
+
+        console.log(str);
+
+
+
+        uriContent = "data:application/octet-stream," + encodeURIComponent(str);
+
+       // saveAs(uriContent, 'css.css');
+
+        newWindow=window.open(uriContent, 'filename.txt');
+        
+        //newWindow = window.open(uriContent, 'css.css');
+
+
+
+    }
+
+/*
+    function saveAs(uri, filename) {
+        var link = document.createElement('a');
+        if (typeof link.download === 'string') {
+            document.body.appendChild(link); // Firefox requires the link to be in the body
+            link.download = filename;
+            link.href = uri;
+            link.click();
+            document.body.removeChild(link); // remove the link when done
+        } else {
+            location.replace(uri);
+        }
+    }
+
+    */
 
     function updateThis() {
         var height = $('#updateHeight').val();
