@@ -193,13 +193,17 @@
    		
 	});
 
-    $('#add-item-tx').click(function() {        
+    $('#add-item-tx').click(function() {  
+        var txtInput = prompt("Text =?");
+        var fontInput = prompt("font size =?");         
         var item = new Konva.Text({
             name: 'item' + item_count,
             x: Math.random() * ((stage.getWidth() - 100) - 10) + 10,
             y: Math.random() * ((stage.getHeight() - 100) - 10) + 10,
-            text: 'Testing',
-            fontSize: Math.random() * (30 - 10) + 10,
+            //text: 'Testing',
+            text: txtInput,
+            //fontSize: Math.random() * (30 - 10) + 10,
+            fontSize: fontInput,
             fontFamily: 'Calibri',
             fill: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
             id: item_count,
@@ -227,7 +231,9 @@
             obj.text = null;
             obj.img = null;
             obj.width = null;
-            obj.height = null;      
+            obj.height = null;
+            obj.fontSize = null;
+            obj.fontFamily = null;       
 
 
 
@@ -255,12 +261,20 @@
                 obj.id = stage.children[0].children[i].attrs.id;
 
                 obj.text = stage.children[0].children[i].attrs.text;
+
+                obj.fontFamily = stage.children[0].children[i].attrs.fontFamily;
+
+                obj.fontSize = stage.children[0].children[i].attrs.fontSize;
             }
 
             else if (obj.type == 'Image'){
                 console.log("img src = " + stage.children[0].children[i].attrs.image.attributes[0].value);
-                obj.img = stage.children[0].children[i].attrs.image.attributes[0].value;
+                //obj.img = stage.children[0].children[i].attrs.image.attributes[0].value;
+
+                obj.img = stage.children[0].children[i].attrs.image.src;
+
                 obj.id = stage.children[0].children[i].index;
+
             }
             else{
                 console.log("test")
@@ -303,10 +317,7 @@
 
         str += '</body></html>';
 
-        uriContent = "data:application/octet-stream," + encodeURIComponent(str);
-
-        newWindow = window.open(uriContent, 'home.html');
-
+        saveContent(str, 'home.html')
         console.log(str);
 
     }
@@ -323,48 +334,23 @@
 
                 str+= '#a' + object_array[i].id + '{'; 
 
-                str+= 'position: relative; display: block; left: ' + object_array[i].x + '; top: ' + object_array[i].y + ';}'
+                str+= 'position: absolute; left: ' + object_array[i].x + 'px !important; top: ' + object_array[i].y + 'px !important; font-family: ' + object_array[i].fontFamily+ '; font-size: ' + object_array[i].fontSize +  'px !important;}'
 
             }
             else if (object_array[i].type == 'Image'){
 
                 str+= '#a' + object_array[i].id + '{'; 
-                str+= 'position: relative; left: ' + object_array[i].x + '; top: ' + object_array[i].y + ';}'
+                str+= 'position: absolute; left: ' + object_array[i].x + 'px; top: ' + object_array[i].y + 'px;}'
 
             }
         }
 
         console.log(str);
-
-
-
-        uriContent = "data:application/octet-stream," + encodeURIComponent(str);
-
-       // saveAs(uriContent, 'css.css');
-
-        newWindow=window.open(uriContent, 'filename.txt');
-        
-        //newWindow = window.open(uriContent, 'css.css');
-
-
+        saveContent(str, 'css.css');
 
     }
 
-/*
-    function saveAs(uri, filename) {
-        var link = document.createElement('a');
-        if (typeof link.download === 'string') {
-            document.body.appendChild(link); // Firefox requires the link to be in the body
-            link.download = filename;
-            link.href = uri;
-            link.click();
-            document.body.removeChild(link); // remove the link when done
-        } else {
-            location.replace(uri);
-        }
-    }
 
-    */
 
     function updateThis() {
         var height = $('#updateHeight').val();
@@ -407,8 +393,11 @@
       
 
         var imageObj = new Image();
+        var heightInput = prompt("height =?");
+        var widthInput = prompt("width =?"); 
 
-       imageObj.src = '/img/p1.png';
+       //imageObj.src = '/img/p1.png';
+       imageObj.src = '/img/' + prompt("filename");
 
         imageObj.onload = function() {    
 
@@ -417,8 +406,8 @@
             x: 50,
             y: 50,
             image: imageObj,
-            width: 106,
-            height: 118,
+            width: widthInput,
+            height: heightInput,
             draggable: true
             });
         
@@ -428,6 +417,14 @@
 
 
     });
+
+    function saveContent(fileContents, fileName){
+        var link = document.createElement('a');
+        link.download = fileName;
+        link.href = 'data:,' + fileContents;
+        link.click();
+    }
+
 
 
     function addItem(item) {
