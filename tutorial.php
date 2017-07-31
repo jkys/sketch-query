@@ -340,7 +340,8 @@
             else if (object_array[i].type == 'Image'){
 
                 str+= '#a' + object_array[i].id + '{'; 
-                str+= 'position: absolute; left: ' + object_array[i].x + 'px; top: ' + object_array[i].y + 'px;}'
+                str+= 'position: absolute; left: ' + object_array[i].x + 'px; top: ' + object_array[i].y + 'px; height: ' + object_array[i].height + 'px; width: ' + object_array[i].width + 'px;'
+                str += '}';
 
             }
         }
