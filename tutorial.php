@@ -144,7 +144,7 @@
 			<img class="icon" id="add-item-c" src="img/c.png">
             <img class="icon" type = "file" id="add-item-img" src="img/img.png">
 			<img class="icon" id="rm-item" src="img/tr.png">
-            <input id = "create-code-btn" type="button" value="Create" onclick="CreateCode();" />
+            <input id = "create-code-btn" type="button" value="Create" onclick="createCode();" />
 		</div>
 		<div class="section" id="container"></div>
 </div>
@@ -230,8 +230,65 @@
         
     });
 
+    $('#add-item-c').click(function() {        
+        var item = new Konva.Circle({
+            name: 'item' + item_count,
+            x: Math.random() * ((stage.getWidth() - 100) - 10) + 10,
+            y: Math.random() * ((stage.getHeight() - 100) - 10) + 10,
+            id: item_count,
+            width: Math.random() * ((stage.getWidth() - 100) - 10) + 10,
+            height: Math.random() * ((stage.getHeight() - 100) - 10) + 10,
+            fill: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
+            stroke: 'black',
+            strokeWidth: 1,
+            draggable: true
+        });
 
-    function CreateCode(){
+        addItem(item);
+        
+    });
+
+    $('#add-item-img').click(function() {
+      
+
+        var imageObj = new Image();
+        var heightInput = prompt("height =?");
+        var widthInput = prompt("width =?"); 
+
+       //imageObj.src = '/img/p1.png';
+       imageObj.src = '/img/' + prompt("filename");
+
+        imageObj.onload = function() {    
+
+
+            var item = new Konva.Image({
+            x: 50,
+            y: 50,
+            image: imageObj,
+            width: widthInput,
+            height: heightInput,
+            draggable: true
+            }); 
+
+            item.on('click', function() {
+                console.log('click ' + JSON.stringify(item));
+                var heightChange = prompt("height change= ");
+                //var fontSize = text.fontSize();
+                //text.fontSize(changeFont);
+                             // event     // value
+                item.setAttr('height', heightChange);
+
+                //updates canvas
+                layer.draw();
+
+        });
+       
+                addItem(item);  
+         };
+    });
+
+
+    function createCode(){
 
 
         for( var i =0; i < stage.children[0].children.length; i ++){
@@ -384,63 +441,6 @@
         item.destroy();
         $('#' + kill).remove();
     }
-
-    $('#add-item-c').click(function() {        
-        var item = new Konva.Circle({
-            name: 'item' + item_count,
-            x: Math.random() * ((stage.getWidth() - 100) - 10) + 10,
-            y: Math.random() * ((stage.getHeight() - 100) - 10) + 10,
-            id: item_count,
-            width: Math.random() * ((stage.getWidth() - 100) - 10) + 10,
-            height: Math.random() * ((stage.getHeight() - 100) - 10) + 10,
-            fill: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
-            stroke: 'black',
-            strokeWidth: 1,
-            draggable: true
-        });
-
-        addItem(item);
-        
-    });
-
-    $('#add-item-img').click(function() {
-      
-
-        var imageObj = new Image();
-        var heightInput = prompt("height =?");
-        var widthInput = prompt("width =?"); 
-
-       //imageObj.src = '/img/p1.png';
-       imageObj.src = '/img/' + prompt("filename");
-
-        imageObj.onload = function() {    
-
-
-            var item = new Konva.Image({
-            x: 50,
-            y: 50,
-            image: imageObj,
-            width: widthInput,
-            height: heightInput,
-            draggable: true
-            }); 
-
-            item.on('click', function() {
-                console.log('click ' + JSON.stringify(item));
-                var heightChange = prompt("height change= ");
-                //var fontSize = text.fontSize();
-                //text.fontSize(changeFont);
-                             // event     // value
-                item.setAttr('height', heightChange);
-
-                //updates canvas
-                layer.draw();
-
-        });
-       
-                addItem(item);  
-         };
-    });
 
     function saveContent(fileContents, fileName){
         var link = document.createElement('a');
