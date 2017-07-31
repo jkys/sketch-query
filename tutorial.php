@@ -207,12 +207,29 @@
             fontFamily: 'Calibri',
             fill: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
             id: item_count,
-            draggable: true
+            draggable: true,
+            listening: true
         });
+
+        item.on('click', function() {
+            console.log('click ' + JSON.stringify(item));
+            var changeFont = prompt("font change= ");
+            //var fontSize = text.fontSize();
+            //text.fontSize(changeFont);
+                         // event     // value
+            item.setAttr('fontSize', changeFont);
+
+            //updates canvas
+            layer.draw();
+
+    });
+
+ 
 
         addItem(item);
         
     });
+
 
     function CreateCode(){
 
@@ -283,12 +300,8 @@
             object_array[i] = obj; 
 
         }
-
         createHTML(object_array);
         createCSS(object_array);
-
-      
-
     }
 
 
@@ -328,7 +341,7 @@
 
         str += 'body {background-color: linen;}'
 
-        for(var i = 0; i < object_array.length; i ++){
+        for(var i = 0; i < object_array.length; i ++){ 
 
             if(object_array[i].type == 'Text'){
 
@@ -410,13 +423,23 @@
             width: widthInput,
             height: heightInput,
             draggable: true
-            });
-        
+            }); 
+
+            item.on('click', function() {
+                console.log('click ' + JSON.stringify(item));
+                var heightChange = prompt("height change= ");
+                //var fontSize = text.fontSize();
+                //text.fontSize(changeFont);
+                             // event     // value
+                item.setAttr('height', heightChange);
+
+                //updates canvas
+                layer.draw();
+
+        });
+       
                 addItem(item);  
          };
-
-
-
     });
 
     function saveContent(fileContents, fileName){
