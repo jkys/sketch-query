@@ -5,6 +5,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdn.rawgit.com/konvajs/konva/1.6.2/konva.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 	<style type="text/css">
 		body {
@@ -82,15 +83,25 @@
 			text-transform: capitalize;
 			font-size: 1.1em;
 		}
-
+/*
 		#container {
         	height: 80%;
         	width: 80%;
         	background-color: #fff;
         	
         }
+*/
+        .section{
 
-        .section, #toolbar {
+            height: 80%;
+            width: 80%;
+            background-color: #fff;
+            
+
+        }
+
+
+        #toolbar {
 
         }
 
@@ -128,6 +139,100 @@
         	border: 1px solid black;
         	z-index: 99999 !important;
         }
+        /* Style the tab */
+        .sidebar.toolbar.tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons inside the tab */
+        .sidebar.toolbar.tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+
+        /* Change background color of buttons on hover */
+        .sidebar.toolbar.tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .sidebar.toolbar.tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .tabs {
+    width:100%;
+    display:inline-block;
+}
+ 
+    /*----- Tab Links -----*/
+    /* Clearfix */
+    .tab-links:after {
+        display:block;
+        clear:both;
+        content:'';
+    }
+ 
+    .tab-links li {
+        margin:0px 5px;
+        float:left;
+        list-style:none;
+    }
+ 
+        .tab-links a {
+            padding:9px 15px;
+            display:inline-block;
+            border-radius:3px 3px 0px 0px;
+            background:#7FB5DA;
+            font-size:16px;
+            font-weight:600;
+            color:#4c4c4c;
+            transition:all linear 0.15s;
+        }
+ 
+        .tab-links a:hover {
+            background:#a7cce5;
+            text-decoration:none;
+        }
+ 
+    li.active a, li.active a:hover {
+        background:#fff;
+        color:#4c4c4c;
+    }
+ 
+    /*----- Content of Tabs -----*/
+
+ 
+        .tab {
+            display:none;
+        }
+ 
+        .tab.active {
+            display:block;
+        }
+    #create-code-btn, #create-new-page {
+
+        color:black;
+    }
+
+    #current_layer {
+        color: black;
+    }
 	</style>
 
 </head>
@@ -145,7 +250,22 @@
             <img class="icon" type = "file" id="add-item-img" src="img/img.png">
 			<img class="icon" id="rm-item" src="img/tr.png">
             <input id = "create-code-btn" type="button" value="Create" onclick="createCode();" />
+            <input id = "create-new-page" type="button" value="New Page" onclick="newPage(page_num);" />
+            <p id = "current_layer" color = "black"> layer = Home </p>
+            <div id = "tabs" class = "w3-bar w3-black"> 
+            </div>
+    
 		</div>
+        <div class="tabs">
+    <ul class="tab-links">
+        <li class="active"><a href="javascript:openHome(stage.children[0]);">Home</a></li>
+    </ul>
+ 
+    <div class="tab-content">
+        <div id="tab1" class ="tab">
+        </div>
+    </div>
+</div>
 		<div class="section" id="container"></div>
 </div>
 <nav>
@@ -157,6 +277,19 @@
 </nav>
 </body>
 <script>
+
+</script>
+<script type="text/javascript">
+	var item_count = 0;
+
+    var object_array = [];
+
+    var big_object_array = [];
+
+    var page_num = 1;
+
+   
+
     var width = $('#container').width();
     var height = $('#container').height();
     
@@ -169,11 +302,8 @@
     var layer = new Konva.Layer();
     
     stage.add(layer);
-</script>
-<script type="text/javascript">
-	var item_count = 0;
 
-    var object_array = [];
+    var cur_layer = layer;
     
     $('#add-item-sq').click(function() {    	
         var item = new Konva.Rect({
@@ -192,6 +322,8 @@
         addItem(item);
    		
 	});
+
+    //can also add complex text
 
     $('#add-item-tx').click(function() {  
         var txtInput = prompt("Text =?");
@@ -220,13 +352,13 @@
             item.setAttr('fontSize', changeFont);
 
             //updates canvas
-            layer.draw();
+            cur_layer.draw();
 
     });
 
  
 
-        addItem(item);
+        addItem(item, cur_layer);
         
     });
 
@@ -244,7 +376,7 @@
             draggable: true
         });
 
-        addItem(item);
+        addItem(item,cur_layer);
         
     });
 
@@ -273,13 +405,11 @@
             item.on('click', function() {
                 console.log('click ' + JSON.stringify(item));
                 var heightChange = prompt("height change= ");
-                //var fontSize = text.fontSize();
-                //text.fontSize(changeFont);
                              // event     // value
                 item.setAttr('height', heightChange);
 
                 //updates canvas
-                layer.draw();
+                cur_layer.draw();
 
         });
        
@@ -290,84 +420,88 @@
 
     function createCode(){
 
+        for( var j = 0; j < stage.children.length; j++){
+            for( var i =0; i < stage.children[j].children.length; i ++){
 
-        for( var i =0; i < stage.children[0].children.length; i ++){
+                // initialize object
 
-            // initialize object
+                
+                var obj = new Object();
 
-            
-            var obj = new Object();
-
-            obj.id = null;
-            obj.type = null;
-            obj.x = null;
-            obj.y = null;
-            obj.text = null;
-            obj.img = null;
-            obj.width = null;
-            obj.height = null;
-            obj.fontSize = null;
-            obj.fontFamily = null;       
-
-
-
-            console.log(stage.children[0].children[i]);
-            console.log("Type: " + stage.children[0].children[i].className);
-            console.log("id: " + stage.children[0].children[i].attrs.id);
-            console.log("X: " + stage.children[0].children[i].attrs.x);
-            console.log("Y: " + stage.children[0].children[i].attrs.y);
+                obj.id = null;
+                obj.type = null;
+                obj.x = null;
+                obj.y = null;
+                obj.text = null;
+                obj.img = null;
+                obj.width = null;
+                obj.height = null;
+                obj.fontSize = null;
+                obj.fontFamily = null;       
 
 
 
-            
-            obj.type = stage.children[0].children[i].className;
-            obj.x = stage.children[0].children[i].attrs.x;
-            obj.y = stage.children[0].children[i].attrs.y;
-            obj.width = stage.children[0].children[i].attrs.width;
-            obj.height = stage.children[0].children[i].attrs.height;
+                console.log(stage.children[j].children[i]);
+                console.log("Type: " + stage.children[j].children[i].className);
+                console.log("id: " + stage.children[j].children[i].attrs.id);
+                console.log("X: " + stage.children[j].children[i].attrs.x);
+                console.log("Y: " + stage.children[j].children[i].attrs.y);
 
 
 
-            if(obj.type == 'Text'){
+                
+                obj.type = stage.children[j].children[i].className;
+                obj.x = stage.children[j].children[i].attrs.x;
+                obj.y = stage.children[j].children[i].attrs.y;
+                obj.width = stage.children[j].children[i].attrs.width;
+                obj.height = stage.children[j].children[i].attrs.height;
 
-                console.log("text?: " + stage.children[0].children[i].attrs.text);
 
-                obj.id = stage.children[0].children[i].attrs.id;
 
-                obj.text = stage.children[0].children[i].attrs.text;
+                if(obj.type == 'Text'){
 
-                obj.fontFamily = stage.children[0].children[i].attrs.fontFamily;
+                    console.log("text?: " + stage.children[j].children[i].attrs.text);
 
-                obj.fontSize = stage.children[0].children[i].attrs.fontSize;
+                    obj.id = stage.children[j].children[i].attrs.id;
+
+                    obj.text = stage.children[j].children[i].attrs.text;
+
+                    obj.fontFamily = stage.children[j].children[i].attrs.fontFamily;
+
+                    obj.fontSize = stage.children[j].children[i].attrs.fontSize;
+                }
+
+                else if (obj.type == 'Image'){
+                    console.log("img src = " + stage.children[j].children[i].attrs.image.attributes[0].value);
+                    //obj.img = stage.children[0].children[i].attrs.image.attributes[0].value;
+
+                    obj.img = stage.children[j].children[i].attrs.image.src;
+
+                    obj.id = stage.children[j].children[i].index;
+
+                }
+                else{
+                    console.log("test")
+                }
+
+                object_array[i] = obj; 
+
             }
 
-            else if (obj.type == 'Image'){
-                console.log("img src = " + stage.children[0].children[i].attrs.image.attributes[0].value);
-                //obj.img = stage.children[0].children[i].attrs.image.attributes[0].value;
 
-                obj.img = stage.children[0].children[i].attrs.image.src;
-
-                obj.id = stage.children[0].children[i].index;
-
-            }
-            else{
-                console.log("test")
-            }
-
-            object_array[i] = obj; 
+            createHTML(object_array, j +'.html', j);
+            createCSS(object_array, j + '.css');
 
         }
-        createHTML(object_array);
-        createCSS(object_array);
     }
 
 
-    function createHTML(object_array){
+    function createHTML(object_array, filename, j){
 
         var str = '';
 
 
-        str += '<!DOCTYPE html><html><head><link rel="stylesheet" href="css.css"><title>Page Title</title></head><body>';
+        str += '<!DOCTYPE html><html><head><link rel="stylesheet" href="' + j + '.css  "><title>Page Title</title></head><body>';
 
         for(var i = 0; i < object_array.length; i ++){
 
@@ -385,18 +519,20 @@
             }
         }
 
+
+
         str += '</body></html>';
 
-        saveContent(str, 'home.html')
+        saveContent(str, filename);
         console.log(str);
 
     }
 
-    function createCSS(object_array){
+    function createCSS(object_array, filename){
 
         var str = '';
 
-        str += 'body {background-color: linen;}'
+        //str += 'body {background-color: linen;}'
 
         for(var i = 0; i < object_array.length; i ++){ 
 
@@ -417,9 +553,89 @@
         }
 
         console.log(str);
-        saveContent(str, 'css.css');
+        saveContent(str, filename);
 
     }
+
+    function newPage(page_number){
+
+        document.getElementById('current_layer').innerHTML = 'current layer = ' + page_number;
+
+        stage.clear();
+
+        console.log("page_num = " + page_number);
+
+        var layer = new Konva.Layer();
+
+        stage.add(layer);
+
+        var layer_name = "layer"+page_number;
+
+
+        $('.tab-links').append('<li> <a href= "javascript:openCity(stage.children[' + page_number + ']);"> '+layer_name+' </a></li>');
+
+            //'<button id= "' + layer_name  +  ' " class = "w3-bar item w3-button" onclick= "openCity('+ layer_name + ')"> tab </button>');
+        $('.tab-content').append('<div id = ' + layer_name + ' class = "tab" > </div>');
+
+        console.log(stage);
+
+  /*      tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].disabled = "false";
+        }
+*/
+        cur_layer = layer;
+   
+        page_num++;
+
+
+    }
+
+    function openHome(layer_name){
+
+        stage.clear();
+
+        console.log(layer_name);
+
+        layer_name.draw();
+
+        cur_layer = layer_name;
+
+        document.getElementById('current_layer').innerHTML = 'layer = home';
+
+    }
+
+    function openCity(layer_name) {
+
+
+        console.log(layer_name);
+
+        stage.clear();
+
+        layer_name.draw();
+
+        var i;
+        var x = document.getElementsByClassName("tabs");
+
+        /*
+        for (i = 0; i < x.length; i++) {
+           x[i].style.display = "none";  
+        }
+
+        */
+
+        document.getElementById('current_layer').innerHTML = 'layer = ' + layer_name.index;
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+       // document.getElementById(cityName).style.display = "block";
+
+
+       // get layer with layername 
+
+       cur_layer = layer_name;
+
+       console.log("cur_layer = " +layer_name);
+}
 
 
 
@@ -451,16 +667,36 @@
 
 
 
-    function addItem(item) {
-        layer.add(item);
-        stage.add(layer);
+    function addItem(item, layer_name) {
+        layer_name.add(item);
+        stage.add(layer_name);
         console.log(stage);
+
+        console.log("layer is " + layer_name);
 
         item_count++;
 
         for (var i = 0; i < item.length; i++) {
     	console.log(item[i]);
     }
+
+/*
+    jQuery(document).ready(function() {
+        jQuery('.tabs .tab-links a').on('click', function(e)  {
+            var currentAttrValue = jQuery(this).attr('href');
+            console.log("success");
+     
+            // Show/Hide Tabs
+            jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
+     
+            // Change/remove current tab to active
+            jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+     
+            e.preventDefault();
+        });
+    });
+
+    */
 
 
     $('.icon').click(function () {
@@ -473,5 +709,7 @@
     	// $('.sidebar').show();
     });
 }
+
+
     </script>
 </html>
