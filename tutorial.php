@@ -252,20 +252,12 @@
             <input id = "create-code-btn" type="button" value="Create" onclick="createCode();" />
             <input id = "create-new-page" type="button" value="New Page" onclick="newPage(page_num);" />
             <p id = "current_layer" color = "black"> layer = Home </p>
-            <div id = "tabs" class = "w3-bar w3-black"> 
-            </div>
-    
 		</div>
         <div class="tabs">
-    <ul class="tab-links">
-        <li class="active"><a href="javascript:openHome(stage.children[0]);">Home</a></li>
-    </ul>
- 
-    <div class="tab-content">
-        <div id="tab1" class ="tab">
+            <ul class="tab-links">
+                <li class="active"><a href="javascript:openHome(stage.children[0]);">Home</a></li>
+            </ul>
         </div>
-    </div>
-</div>
 		<div class="section" id="container"></div>
 </div>
 <nav>
