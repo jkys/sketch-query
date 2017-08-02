@@ -225,7 +225,7 @@
         .tab.active {
             display:block;
         }
-    #create-code-btn, #create-new-page, #current_layer, #load-template-btn {
+    #create-code-btn, #create-new-page, #current_layer, #load-template-btn, #delete_layer_btn {
 
         color:black;
     }
@@ -251,6 +251,7 @@
             <input id = "load-template-btn" type="button" value="Load Template" onclick="loadTemplate();" />
 
             <p id = "current_layer" color = "black"> layer = Home </p>
+            <input id = "delete_layer_btn" type="button" value = "X" onclick = "removeLayer();"/>
 		</div>
         <div class="tabs">
             <ul class="tab-links">
@@ -603,7 +604,9 @@
         filenames[page_number] = layer_name; 
 
 
-        $('.tab-links').append('<li id = "f' + page_number + '"> <a href= "javascript:openCity(stage.children[' + page_number + ']);"> '+layer_name+' </a> <button id = "g'+ page_number + '"type="button" onclick = "removeLayer('+ page_number + ')">X</button></li>');
+        $('.tab-links').append('<li id = "f' + page_number + '"> <a href= "javascript:openCity(stage.children[' + page_number + ']);"> '+layer_name+' </a></button></li>');
+
+        //stage.current_layer.number = page_number;
 
             //'<button id= "' + layer_name  +  ' " class = "w3-bar item w3-button" onclick= "openCity('+ layer_name + ')"> tab </button>');
        // $('.tab-content').append('<div id = ' + layer_name + ' class = "tab" > </div>');
@@ -661,13 +664,35 @@
 }
 
 
-    function removeLayer(index){
+    function removeLayer(){
 
-        stage.children[index].destroy();
+        
+        if(cur_layer.index != 0){
 
-        filenames.splice(index, 1);
 
-        $('#f' + index).remove();
+            filenames.splice(cur_layer.index, 1);
+
+            cur_layer.destroy();
+
+
+            console.log(stage);
+
+
+
+
+            //get the active tab and remove it from the DOM ***JON PLZ ****** THEN OPEN MAKE HOME TAB ACTIVE
+
+            openHome(stage.children[0]);
+            //$(index).remove();
+
+            cur_layer = stage.children[0];
+
+        }
+
+        else{
+
+            console.log("didnt delete home page we dont want that");
+        }
     }
 
 
