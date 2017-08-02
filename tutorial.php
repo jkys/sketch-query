@@ -374,17 +374,18 @@
 
     $('#add-item-img').click(function() {
       
+        console.log("here");
 
         var imageObj = new Image();
         var heightInput = prompt("height =?");
         var widthInput = prompt("width =?"); 
 
        //imageObj.src = '/img/p1.png';
-       imageObj.src = '/img/' + prompt("filename");
+       
 
         imageObj.onload = function() {    
 
-
+            console.log("test");
             var item = new Konva.Image({
             x: 50,
             y: 50,
@@ -403,10 +404,14 @@
                 //updates canvas
                 cur_layer.draw();
 
-        });
+            });
        
-                addItem(item);  
-         };
+                addItem(item,cur_layer);  
+        };
+
+        imageObj.src = '/img/' + prompt("filename");
+
+        console.log(imageObj);
     });
 
 
@@ -492,8 +497,21 @@
 
         var str = '';
 
+       
+
 
         str += '<!DOCTYPE html><html><head><link rel="stylesheet" href="' + j + '.css  "><title>Page Title</title></head><body>';
+
+         if(stage.children.length > 1){
+
+            console.log("multiple pages");
+
+            str += '<div class = "topnav">';
+            for(var k = 0; k < stage.children.length; k++){
+                str+= '<a href = "' + k + '.html" >' + k + '</a> </br>'
+            }
+            str += '</div>';
+        }
 
         for(var i = 0; i < object_array.length; i ++){
 
