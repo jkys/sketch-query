@@ -520,7 +520,7 @@
 
             str += '<div class = "topnav">';
             for(var k = 0; k < stage.children.length; k++){
-                str+= '<a href = "' + k + '.html" >' + k + '</a> </br>'
+                str+= '<a href = "' + filenames[k] + '.html" >' + k + '</a> </br>'
             }
             str += '</div>';
         }
@@ -607,7 +607,7 @@
         $('.tab-links').append('<li> <a href= "javascript:openCity(stage.children[' + page_number + ']);"> '+layer_name+' </a></li>');
 
             //'<button id= "' + layer_name  +  ' " class = "w3-bar item w3-button" onclick= "openCity('+ layer_name + ')"> tab </button>');
-        $('.tab-content').append('<div id = ' + layer_name + ' class = "tab" > </div>');
+       // $('.tab-content').append('<div id = ' + layer_name + ' class = "tab" > </div>');
 
   /*      tablinks = document.getElementsByClassName("tablinks");
         for (i = 0; i < tablinks.length; i++) {
