@@ -815,9 +815,67 @@
             cur_layer.draw();
 
     });
+        item_count++; 
+        addItem(item, cur_layer);
 
+        var item = new Konva.Text({
+            name: 'item' + item_count,
+            x: 350,
+            y: 60,
+            //text: 'Testing',
+            text: 'Phone number: ',
+            //fontSize: Math.random() * (30 - 10) + 10,
+            fontSize: 30,
+            fontFamily: 'Calibri',
+            fill: 'black',
+            id: item_count,
+            draggable: true,
+            listening: true
+        });
 
+        item.on('click', function() {
+            console.log('click ' + JSON.stringify(item));
+            var changeFont = prompt("font change= ");
+            //var fontSize = text.fontSize();
+            //text.fontSize(changeFont);
+                         // event     // value
+            item.setAttr('fontSize', changeFont);
 
+            //updates canvas
+            cur_layer.draw();
+
+    });
+        item_count++;
+        addItem(item, cur_layer);
+
+        var item = new Konva.Text({
+            name: 'item' + item_count,
+            x: 350,
+            y: 85,
+            //text: 'Testing',
+            text: 'Address: ',
+            //fontSize: Math.random() * (30 - 10) + 10,
+            fontSize: 30,
+            fontFamily: 'Calibri',
+            fill: 'black',
+            id: item_count,
+            draggable: true,
+            listening: true
+        });
+
+        item.on('click', function() {
+            console.log('click ' + JSON.stringify(item));
+            var changeFont = prompt("font change= ");
+            //var fontSize = text.fontSize();
+            //text.fontSize(changeFont);
+                         // event     // value
+            item.setAttr('fontSize', changeFont);
+
+            //updates canvas
+            cur_layer.draw();
+
+    });
+        item_count++;
         addItem(item, cur_layer);
 
 
