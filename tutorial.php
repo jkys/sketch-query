@@ -289,6 +289,10 @@
     stage.add(layer);
 
     var cur_layer = layer;
+
+    var filenames = [];
+
+    filenames[0] = 'Home';
     
     $('#add-item-sq').click(function() {    	
         var item = new Konva.Rect({
@@ -413,6 +417,9 @@
 
             var object_array = [];
 
+            object_array.filename_html = filenames[j] + '.html'; 
+            object_array.filename_css = filenames[j] + '.css'; 
+
 
             for( var i =0; i < stage.children[j].children.length; i ++){
 
@@ -505,7 +512,7 @@
        
 
 
-        str += '<!DOCTYPE html><html><head><link rel="stylesheet" href="' + j + '.css  "><title>Page Title</title></head><body>';
+        str += '<!DOCTYPE html><html><head><link rel="stylesheet" href="' + object_array.filename_css + '"><title>Page Title</title></head><body>';
 
          if(stage.children.length > 1){
 
@@ -540,7 +547,7 @@
 
         str += '</body></html>';
 
-        saveContent(str, filename);
+        saveContent(str, object_array.filename_html);
         
 
     }
@@ -575,7 +582,7 @@
         }
 
        
-        saveContent(str, filename);
+        saveContent(str, object_array.filename_css);
 
     }
 
@@ -586,11 +593,15 @@
         stage.clear();
 
 
+
+
         var layer = new Konva.Layer();
 
         stage.add(layer);
 
-        var layer_name = "layer"+page_number;
+        var layer_name = prompt("Enter new page name");
+
+        filenames[page_number] = layer_name; 
 
 
         $('.tab-links').append('<li> <a href= "javascript:openCity(stage.children[' + page_number + ']);"> '+layer_name+' </a></li>');
