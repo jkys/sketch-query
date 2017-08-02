@@ -225,14 +225,11 @@
         .tab.active {
             display:block;
         }
-    #create-code-btn, #create-new-page {
+    #create-code-btn, #create-new-page, #current_layer, #load-template-btn {
 
         color:black;
     }
 
-    #current_layer {
-        color: black;
-    }
 	</style>
 
 </head>
@@ -251,6 +248,8 @@
 			<img class="icon" id="rm-item" src="img/tr.png">
             <input id = "create-code-btn" type="button" value="Create" onclick="createCode();" />
             <input id = "create-new-page" type="button" value="New Page" onclick="newPage(page_num);" />
+            <input id = "load-template-btn" type="button" value="Load Template" onclick="loadTemplate();" />
+
             <p id = "current_layer" color = "black"> layer = Home </p>
 		</div>
         <div class="tabs">
@@ -604,7 +603,7 @@
         filenames[page_number] = layer_name; 
 
 
-        $('.tab-links').append('<li> <a href= "javascript:openCity(stage.children[' + page_number + ']);"> '+layer_name+' </a></li>');
+        $('.tab-links').append('<li id = "f' + page_number + '"> <a href= "javascript:openCity(stage.children[' + page_number + ']);"> '+layer_name+' </a> <button id = "g'+ page_number + '"type="button" onclick = "removeLayer('+ page_number + ')">X</button></li>');
 
             //'<button id= "' + layer_name  +  ' " class = "w3-bar item w3-button" onclick= "openCity('+ layer_name + ')"> tab </button>');
        // $('.tab-content').append('<div id = ' + layer_name + ' class = "tab" > </div>');
@@ -662,6 +661,16 @@
 }
 
 
+    function removeLayer(index){
+
+        stage.children[index].destroy();
+
+        filenames.splice(index, 1);
+
+        $('#f' + index).remove();
+    }
+
+
 
     function updateThis() {
         var height = $('#updateHeight').val();
@@ -706,6 +715,7 @@
     	console.log(item1[i]);
     }
 
+
 /*
     jQuery(document).ready(function() {
         jQuery('.tabs .tab-links a').on('click', function(e)  {
@@ -735,6 +745,58 @@
     	// $('.sidebar').show();
     });
 }
+
+
+    function loadTemplate(){
+
+        stage.destroyChildren();
+
+        var layer = new Konva.Layer();
+        stage.add(layer);
+
+        cur_layer = layer;
+
+        filenames = []; 
+
+        filenames[0] = 'Home';
+
+        // ALSO DELETE ALL TABS
+
+
+        var item = new Konva.Text({
+            name: 'item' + item_count,
+            x: 300,
+            y: 10,
+            //text: 'Testing',
+            text: 'Website Name',
+            //fontSize: Math.random() * (30 - 10) + 10,
+            fontSize: 60,
+            fontFamily: 'Calibri',
+            fill: 'red',
+            id: item_count,
+            draggable: true,
+            listening: true
+        });
+
+        item.on('click', function() {
+            console.log('click ' + JSON.stringify(item));
+            var changeFont = prompt("font change= ");
+            //var fontSize = text.fontSize();
+            //text.fontSize(changeFont);
+                         // event     // value
+            item.setAttr('fontSize', changeFont);
+
+            //updates canvas
+            cur_layer.draw();
+
+    });
+
+
+
+        addItem(item, cur_layer);
+
+
+    }
 
 
     </script>
