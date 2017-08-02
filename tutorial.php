@@ -273,14 +273,7 @@
 </script>
 <script type="text/javascript">
 	var item_count = 0;
-
-    var object_array = [];
-
-    var big_object_array = [];
-
     var page_num = 1;
-
-   
 
     var width = $('#container').width();
     var height = $('#container').height();
@@ -329,7 +322,7 @@
             //fontSize: Math.random() * (30 - 10) + 10,
             fontSize: fontInput,
             fontFamily: 'Calibri',
-            fill: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
+            fill: 'green',
             id: item_count,
             draggable: true,
             listening: true
@@ -374,7 +367,6 @@
 
     $('#add-item-img').click(function() {
       
-        console.log("here");
 
         var imageObj = new Image();
         var heightInput = prompt("height =?");
@@ -385,7 +377,6 @@
 
         imageObj.onload = function() {    
 
-            console.log("test");
             var item = new Konva.Image({
             x: 50,
             y: 50,
@@ -396,7 +387,6 @@
             }); 
 
             item.on('click', function() {
-                console.log('click ' + JSON.stringify(item));
                 var heightChange = prompt("height change= ");
                              // event     // value
                 item.setAttr('height', heightChange);
@@ -411,18 +401,26 @@
 
         imageObj.src = '/img/' + prompt("filename");
 
-        console.log(imageObj);
     });
 
 
     function createCode(){
 
+        console.log("final stage = ");
+        console.log(stage);
+
         for( var j = 0; j < stage.children.length; j++){
+
+            var object_array = [];
+
+
             for( var i =0; i < stage.children[j].children.length; i ++){
 
                 // initialize object
 
                 
+
+
                 var obj = new Object();
 
                 obj.id = null;
@@ -434,42 +432,46 @@
                 obj.width = null;
                 obj.height = null;
                 obj.fontSize = null;
-                obj.fontFamily = null;       
+                obj.fontFamily = null;   
+                obj.fontColor = null;    
 
 
 
                 console.log(stage.children[j].children[i]);
-                console.log("Type: " + stage.children[j].children[i].className);
-                console.log("id: " + stage.children[j].children[i].attrs.id);
-                console.log("X: " + stage.children[j].children[i].attrs.x);
-                console.log("Y: " + stage.children[j].children[i].attrs.y);
 
+                var scale = 0;
+
+                scale = (980 / width);
+
+                var scale1 = (980 / height);
 
 
                 
                 obj.type = stage.children[j].children[i].className;
-                obj.x = stage.children[j].children[i].attrs.x;
-                obj.y = stage.children[j].children[i].attrs.y;
+                obj.x = stage.children[j].children[i].attrs.x * scale;
+                obj.y = stage.children[j].children[i].attrs.y * scale1;
                 obj.width = stage.children[j].children[i].attrs.width;
-                obj.height = stage.children[j].children[i].attrs.height;
+                obj.height = (stage.children[j].children[i].attrs.height);
 
 
 
                 if(obj.type == 'Text'){
 
-                    console.log("text?: " + stage.children[j].children[i].attrs.text);
+                  
 
-                    obj.id = stage.children[j].children[i].attrs.id;
+                    obj.id = stage.children[j].children[i].index;
 
                     obj.text = stage.children[j].children[i].attrs.text;
 
                     obj.fontFamily = stage.children[j].children[i].attrs.fontFamily;
 
                     obj.fontSize = stage.children[j].children[i].attrs.fontSize;
+
+                    obj.fontColor = stage.children[j].children[i].attrs.fill;
                 }
 
                 else if (obj.type == 'Image'){
-                    console.log("img src = " + stage.children[j].children[i].attrs.image.attributes[0].value);
+                
                     //obj.img = stage.children[0].children[i].attrs.image.attributes[0].value;
 
                     obj.img = stage.children[j].children[i].attrs.image.src;
@@ -478,16 +480,16 @@
 
                 }
                 else{
-                    console.log("test")
+                  
                 }
 
                 object_array[i] = obj; 
 
             }
 
-
             createHTML(object_array, j +'.html', j);
             createCSS(object_array, j + '.css');
+            
 
         }
     }
@@ -496,6 +498,9 @@
     function createHTML(object_array, filename, j){
 
         var str = '';
+
+        console.log("obj array ->");
+        console.log(object_array);
 
        
 
@@ -524,7 +529,9 @@
             }
             else if (object_array[i].type == 'Image'){
 
-                str+= '<img id = a' + object_array[i].id + ' src=' + object_array[i].img + '>'
+                str+= '<img id = a' + i + object_array[i].id + ' src=' + object_array[i].img + '>'
+
+                console.log("image :)");
 
             }
         }
@@ -534,7 +541,7 @@
         str += '</body></html>';
 
         saveContent(str, filename);
-        console.log(str);
+        
 
     }
 
@@ -550,19 +557,24 @@
 
                 str+= '#a' + object_array[i].id + '{'; 
 
-                str+= 'position: absolute; left: ' + object_array[i].x + 'px !important; top: ' + object_array[i].y + 'px !important; font-family: ' + object_array[i].fontFamily+ '; font-size: ' + object_array[i].fontSize +  'px !important;}'
+                str+= 'position: absolute; left: ' + object_array[i].x + 'px !important; top: ' + object_array[i].y + 'px !important; font-family: ' + object_array[i].fontFamily+ '; font-size: ' + object_array[i].fontSize +  'px !important; color: '+ object_array[i].fontColor+ '; }'
 
             }
             else if (object_array[i].type == 'Image'){
 
-                str+= '#a' + object_array[i].id + '{'; 
+                str+= '#a' + i + object_array[i].id + '{'; 
                 str+= 'position: absolute; left: ' + object_array[i].x + 'px; top: ' + object_array[i].y + 'px; height: ' + object_array[i].height + 'px; width: ' + object_array[i].width + 'px;'
                 str += '}';
 
             }
+
+            if(stage.children.length > 1){
+
+                // add css for nav bar 
+            }
         }
 
-        console.log(str);
+       
         saveContent(str, filename);
 
     }
@@ -573,7 +585,6 @@
 
         stage.clear();
 
-        console.log("page_num = " + page_number);
 
         var layer = new Konva.Layer();
 
@@ -586,8 +597,6 @@
 
             //'<button id= "' + layer_name  +  ' " class = "w3-bar item w3-button" onclick= "openCity('+ layer_name + ')"> tab </button>');
         $('.tab-content').append('<div id = ' + layer_name + ' class = "tab" > </div>');
-
-        console.log(stage);
 
   /*      tablinks = document.getElementsByClassName("tablinks");
         for (i = 0; i < tablinks.length; i++) {
@@ -604,9 +613,6 @@
     function openHome(layer_name){
 
         stage.clear();
-
-        console.log(layer_name);
-
         layer_name.draw();
 
         cur_layer = layer_name;
@@ -617,8 +623,6 @@
 
     function openCity(layer_name) {
 
-
-        console.log(layer_name);
 
         stage.clear();
 
@@ -644,7 +648,6 @@
 
        cur_layer = layer_name;
 
-       console.log("cur_layer = " +layer_name);
 }
 
 
@@ -677,17 +680,19 @@
 
 
 
-    function addItem(item, layer_name) {
-        layer_name.add(item);
-        stage.add(layer_name);
+    function addItem(item1, layer_name) {
+        layer_name.add(item1);
+        //stage.add(layer_name);
         console.log(stage);
 
-        console.log("layer is " + layer_name);
+        layer_name.draw();
+
+        console.log("layer is " + JSON.stringify(layer_name));
 
         item_count++;
 
-        for (var i = 0; i < item.length; i++) {
-    	console.log(item[i]);
+        for (var i = 0; i < item1.length; i++) {
+    	console.log(item1[i]);
     }
 
 /*
