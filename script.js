@@ -1,3 +1,10 @@
+/*
+* Authors: Jonathan Keys, Colby Daly
+* Instructor: Durga Suresh
+* SketchQuery 2017
+* Wentworth Institute of Technology
+*/
+
 var item_count = 0;
 var page_num = 1;
 
@@ -12,14 +19,14 @@ var stage = new Konva.Stage({
 
 var layer = new Konva.Layer();
 
-stage.add(layer);
-
-var cur_layer = layer;
+stage.add(layer); // Stage adding first layer
+var cur_layer = layer; // Current layer user is working on
 
 var filenames = [];
 
 filenames[0] = 'Home';
 
+/* Listeners for image/button clicks */
 
 $('#add-item-img').click(function() {
     createImage();
@@ -41,17 +48,29 @@ $('#add-item-tx').click(function() {
     $('#screen').toggle();
 });
 
+/* Functions for user */
+
+/**
+* Prepares the module to be overlayed on the screen by getting 
+* rid of all previous data and adding the title and Submit, 
+* Destroy, and Exit buttons.
+*/
 function prepare() {
     $('#module').empty();
     $('#module').append('<h1 id="data">Characteristics</h1><button id="create" onclick="submit();">Submit</button><button id="destroy" onclick="destroy();">Destroy</button><button id="clear" onclick="exit();">Exit</button>');
 }
 
+/**
+* Toggles the view of the module for when a user exits, this 
+* then calls prepare() to get ready for next used.
+*/
 function exit() {
     $('#screen').toggle();
     prepare();
 }
-
-
+/**
+* Creates an Image from the Web URL and posts it to the canvas.
+*/
 function createImageFromURL(){
     var imageURL = prompt("Enter web URL");
     Konva.Image.fromURL(imageURL, function(image){
@@ -89,6 +108,9 @@ function createImage() {
     imageObj.src = str;
 }
 
+/**
+* Creates a rectangle box based on data based to it from the module.
+*/
 function createRectangle(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
     var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
