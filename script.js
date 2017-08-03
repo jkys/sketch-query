@@ -97,8 +97,7 @@ function createImageFromURL(){
 function createImage() {
     var imageObj = new Image();    
     imageObj.onload = function() {    
-        console.log("winning");
-
+        
         var item = new Konva.Image({
             x: 50,
             y: 50,
@@ -131,7 +130,9 @@ function createImage() {
 }
 
 /**
-* Creates a rectangle box based on data based to it from the module.
+* Creates the rectangle object based on data taken from the module 
+* and adds it to the current layer, then sets a rectangle listener 
+* on it via the setRectangleListener() method.
 */
 function createRectangle(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
@@ -163,15 +164,26 @@ function createRectangle(data) {
     setRectangleListener(item);
 }
 
+/**
+* Sets a listener on a rectangle item which was created in case 
+* it is clicked on. If it is, then it will prompt the module 
+* and have the user enter new data.
+*/
 function setRectangleListener(item) {
     item.on('click', function() {
         prepare();
         Rectangle.setCharacteristics(item.attrs.fill, item.attrs.width, item.attrs.height, item.attrs.stroke, item.attrs.strokeWidth, item.attrs.x, item.attrs.y, item.attrs.id);
         item.destroy();
         $('#screen').toggle();
+        cur_layer.draw();
     });
 }
 
+/**
+* Creates the text object based on data taken from the module 
+* and adds it to the current layer, then sets a text listener 
+* on it via the setTextListener() method.
+*/
 function createText(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
     var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
@@ -200,10 +212,20 @@ function createText(data) {
     setTextListener(item);
 }
 
+/**
+* Check if a given value is a number or not.
+* True: is number
+* True: is not a number
+*/
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
+/**
+* Sets a listener on a text item which was created in case 
+* it is clicked on. If it is, then it will prompt the module 
+* and have the user enter new data.
+*/
 function setTextListener(item) {
     item.on('click', function() {
         prepare();
@@ -214,6 +236,10 @@ function setTextListener(item) {
     });
 }
 
+/*
+* Adds the current created item onto a specified layer, 
+* then redraws the layer to show all changes made.
+*/
 function addItem(item1, layer_name) {
     layer_name.add(item1);
     console.log(stage);
@@ -225,34 +251,45 @@ function addItem(item1, layer_name) {
     }
 }
 
+/**
+* Redraws the current layer to update the element which 
+* was previously destroyed (destroyed in each objects 
+* listener on each edit)
+*/
 function destroy() {
     cur_layer.draw();
     $('#screen').toggle();
     prepare();
 }
 
+/**
+* Called when user clicks the submit button on module to 
+* accept changes or creation to object on the layer.
+*/
 function submit() {
     $('#screen').toggle();
-    var type = $('#locator').val();
+    var type = $('#locator').val(); // Type of object which was just created
     var data;
 
+    /*
+    * Switch case used to traverse through the type of object which was 
+    * created and give it all its necessary data to then invoke each's 
+    * custom create method.
+    */
     switch(type) {
         case "text":
             data = new Text();
             data.setValues($("input[name=Color]").val(), $("input[name=FontSize]").val(), $("input[name=FontFamily]").val(), $("input[name=Text]").val(), $("input[name=x]").val(), $("input[name=y]").val());
-            data.print();
             createText(data);
             break;
         case "image":
             data = new Image();
             data.setValues($("input[name=Height]").val(), $("input[name=Width]").val(), $("input[name=Url]").val());
-            data.print();
             createImage(data);
             break;
         case "rectangle":
             data = new Rectangle();
             data.setValues($("input[name=Height]").val(), $("input[name=Width]").val(), $("input[name=Color]").val(), $("input[name=Border]").val(), $("input[name=BorderWeight]").val(), $("input[name=x]").val(), $("input[name=y]").val());
-            data.print();
             createRectangle(data);
             break;
         case "newPage":
