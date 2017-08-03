@@ -32,11 +32,15 @@ function createCode(){
                 var scale = (980 / width);
                 var scale1 = (980 / height);
 
+
+
                 obj.type = stage.children[j].children[i].className;
                 obj.x = stage.children[j].children[i].attrs.x * scale;
                 obj.y = stage.children[j].children[i].attrs.y * scale1;
                 obj.width = stage.children[j].children[i].attrs.width;
                 obj.height = (stage.children[j].children[i].attrs.height);
+
+                console.log(obj.x);
 
                 if(obj.type == 'Text'){
                     obj.id = stage.children[j].children[i].index;
@@ -71,6 +75,11 @@ function createCode(){
                     
                     
                 }
+                else if (obj.type = 'Rect'){
+
+                    obj.color = stage.children[j].children[i].attrs.fill;
+
+                }
                 object_array[i] = obj; 
             }
             createHTML(object_array, j +'.html', j);
@@ -97,8 +106,11 @@ function createCode(){
             }
             str += '</div>';
         }
+        str+= '<canvas id="myCanvas" width="980" height="980"></canvas>';
 
         for(var i = 0; i < object_array.length; i ++){
+
+            var rect_flag = 0;
             console.log(object_array[i]);
 
             if(object_array[i].type == 'Text'){
@@ -106,6 +118,15 @@ function createCode(){
             } else if (object_array[i].type == 'Image'){
                 str+= '<img id = a' + i + object_array[i].id + ' src=' + object_array[i].img + '>'
                 console.log("image :)");
+            }
+            else if (object_array[i].type == 'Rect'){
+            str += '<script type="text/javascript">var canvas = document.getElementById("myCanvas"); var context = canvas.getContext("2d"); context.fillStyle = "'+object_array[i].color+ '"; context.fillRect('+object_array[i].x + ', '+ object_array[i].y + ', '+ object_array[i].width +', '+ object_array[i].height+');   </script> '
+
+                rect_flag = 1;
+            }
+            if(rect_flag == 1){
+
+
             }
         }
         str += '</body></html>';
