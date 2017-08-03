@@ -28,6 +28,13 @@ $('#add-item-img').click(function() {
     createImage();
 });
 
+$('#add-item-img-url').click(function() {
+    //prepare();
+    //Image.setCharacteristics();
+    //$('#screen').toggle();
+    createImageFromURL();
+});
+
 $('#add-item-sq').click(function() {        
     prepare();
     Rectangle.setCharacteristics();
@@ -87,6 +94,33 @@ function createRecntagle(data) {
     });
 
     addItem(item, cur_layer);
+}
+
+function createImageFromURL(){
+
+
+
+    var imageURL = prompt("Enter web URL");
+
+
+
+
+    Konva.Image.fromURL(imageURL, function(image){
+      // image is Konva.Image instance
+      
+      image.setAttr('height', 300);
+      image.setAttr('x', 50);
+      image.setAttr('y', 50);
+      image.setAttr('width', 300);
+      image.setAttr('draggable', true);
+
+
+      addItem(image, cur_layer);
+
+    });
+
+    
+
 }
 
 function createImage() {
