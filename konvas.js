@@ -139,7 +139,16 @@ function createCode(){
         stage.clear();
         var layer = new Konva.Layer();
         stage.add(layer);
-        var layer_name = prompt("Enter new page name");
+
+        prepare();
+        NewPage.setCharacteristics(page_number);
+        $('#screen').toggle();
+    }
+
+    function createNewPage(name, page_number) {
+        var layer_name = name;
+
+
         document.getElementById('current_layer').innerHTML = layer_name;
         filenames[page_number] = layer_name; 
         console.log(filenames);

@@ -49,6 +49,7 @@
 </body>
 <script type="text/javascript" src="konvas.js"></script>
 <script type="text/javascript" src="text.js"></script>
+<script type="text/javascript" src="newPage.js"></script>
 <script type="text/javascript" src="image.js"></script>
 <script type="text/javascript" src="rectangle.js"></script>
 <script type="text/javascript" src="script.js"></script>

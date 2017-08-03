@@ -212,6 +212,9 @@ function submit() {
             data.print();
             createRecntagle(data);
             break;
+        case "newPage":
+            createNewPage($("input[name=pageName]").val(), $("#page_number").val());
+            break;
         default:
             break;
     }
