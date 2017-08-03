@@ -1,10 +1,13 @@
 class Rectangle {
-	setValues(height, width, color, border, borderWeight) {
+	setValues(height, width, color, border, borderWeight, x, y, id) {
         this.height = height;
         this.width = width;
         this.color = color;
         this.border = border;
         this.borderWeight = borderWeight;
+        this.x = x;
+        this.y = y;
+        this.id = id;
     }
 
     static makePrint(name, value) {
@@ -24,7 +27,7 @@ class Rectangle {
         return data;
     }
 
-    static setCharacteristics(color, width, height, border, borderWeight) {
+    static setCharacteristics(color, width, height, border, borderWeight, x, y, id) {
     	
     	var arr = ['Height', 'Width', 'Color', 'Border', 'BorderWeight'];
     	var arr1 = [height, width, color, border, borderWeight];
@@ -33,6 +36,9 @@ class Rectangle {
     		$('#data').after(Text.makePrint(arr[i], arr1[i]));
     	}
 
+    	$('#data').after('<input id="id" type="text" name="id" value="'+ id + '" hidden readonly>');
+        $('#data').after('<input id="x" type="text" name="x" value="'+ x + '" hidden readonly>');
+        $('#data').after('<input id="y" type="text" name="y" value="'+ y + '" hidden readonly>');
         $('#data').after('<input id="locator" type="text" name="type" value="rectangle" hidden readonly>');
         return 1;
     }
@@ -59,5 +65,17 @@ class Rectangle {
 
     getBorderWeight() {
     	return this.borderWeight;
+    }
+
+    getX() {
+        return this.x;
+    }
+
+    getY() {
+        return this.y;
+    }
+
+    getId() {
+        return this.id;
     }
 }

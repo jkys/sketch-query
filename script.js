@@ -57,44 +57,44 @@ function exit() {
     prepare();
 }
 
-function createRecntagle(data) {
-    var item = new Konva.Rect({
-        name: 'item' + item_count,
-        x: Math.random() * ((stage.getWidth() - 100) - 10) + 10,
-        y: Math.random() * ((stage.getHeight() - 100) - 10) + 10,
-        id: item_count,
-        width: data.getHeight(),
-        height: data.getWidth(),
-        fill: data.getColor(),
-        stroke: data.getBorder(),
-        strokeWidth: data.getBorderWeight(),
-        draggable: true
-    });
+// function createRecntagle(data) {
+//     var item = new Konva.Rect({
+//         name: 'item' + item_count,
+//         x: Math.random() * ((stage.getWidth() - 100) - 10) + 10,
+//         y: Math.random() * ((stage.getHeight() - 100) - 10) + 10,
+//         id: item_count,
+//         width: data.getHeight(),
+//         height: data.getWidth(),
+//         fill: data.getColor(),
+//         stroke: data.getBorder(),
+//         strokeWidth: data.getBorderWeight(),
+//         draggable: true
+//     });
 
-    item.on('click', function() {
+//     item.on('click', function() {
 
-        var color = item.fill();
-        var width = item.width();
-        var height = item.height();
-        var border = item.stroke();
-        var borderWeight = item.strokeWidth();
+//         var color = item.fill();
+//         var width = item.width();
+//         var height = item.height();
+//         var border = item.stroke();
+//         var borderWeight = item.strokeWidth();
 
-        prepare();
-        Rectangle.setCharacteristics(color, width, height, border, borderWeight);
-        $('#screen').toggle();
+//         prepare();
+//         Rectangle.setCharacteristics(color, width, height, border, borderWeight);
+//         $('#screen').toggle();
 
-        item.setAttr('height', data.getHeight());
-        item.setAttr('width', data.getWidth());
-        item.setAttr('fill', data.getColor());
-        item.setAttr('stroke', data.getBorder());
-        item.setAttr('strokeWidth', data.getBorderWeight());
+//         item.setAttr('height', data.getHeight());
+//         item.setAttr('width', data.getWidth());
+//         item.setAttr('fill', data.getColor());
+//         item.setAttr('stroke', data.getBorder());
+//         item.setAttr('strokeWidth', data.getBorderWeight());
 
-        //updates canvas
-        cur_layer.draw();
-    });
+//         //updates canvas
+//         cur_layer.draw();
+//     });
 
-    addItem(item, cur_layer);
-}
+//     addItem(item, cur_layer);
+// }
 
 function createImageFromURL(){
 
@@ -169,35 +169,32 @@ function createImage() {
 function createRectangle(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
     var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
-    var text = data.getText() == "" ? "Click to edit string" : data.getText();
-    var fontSize = data.getFontSize() == "" ? 24 : data.getFontSize();
-    var fontFamily = data.getFontFamily() == "" ? "Arial" : data.getFontFamily();
     var color = data.getColor() == "" ? "#000000" : data.getColor();
+    var border = data.getBorder() == "" ? "#000000" : data.getBorder();
+    var borderWeight = !Number.isNaN(data.getBorderWeight()) ? 1 : data.getBorderWeight();
 
-    var item = new Konva.Text({
+    var item = new Konva.Rect({
         name: 'item' + item_count,
         x: x,
         y: y,
-        text: text,
-        fontSize: fontSize,
-        fontFamily: fontFamily,
-        fill: color,
         id: item_count,
+        width: data.getWidth(),
+        height: data.getHeight(),
+        fill: color,
+        stroke: border,
+        strokeWidth: borderWeight,
         draggable: true,
         listening: true
     });
-    addItem(item, cur_layer);
-    setTextListener(item);
-}
 
-function isNumeric(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
+    addItem(item, cur_layer);
+    setRectangleListener(item);
 }
 
 function setRectangleListener(item) {
     item.on('click', function() {
         prepare();
-        Text.setCharacteristics(item.attrs.text, item.attrs.fontFamily, item.attrs.fontSize, item.attrs.fill, item.attrs.x, item.attrs.y, item.attrs.id);
+        Rectangle.setCharacteristics(item.attrs.fill, item.attrs.width, item.attrs.height, item.attrs.stroke, item.attrs.strokeWidth, item.attrs.x, item.attrs.y, item.attrs.id);
         item.destroy();
         $('#screen').toggle();
     });
@@ -277,11 +274,10 @@ function submit() {
             createImage(data);
             break;
         case "rectangle":
-            console.log("eh");
             data = new Rectangle();
-            data.setValues($("input[name=Height]").val(), $("input[name=Width]").val(), $("input[name=Color]").val(), $("input[name=Border]").val(), $("input[name=BorderWeight]").val());
+            data.setValues($("input[name=Height]").val(), $("input[name=Width]").val(), $("input[name=Color]").val(), $("input[name=Border]").val(), $("input[name=BorderWeight]").val(), $("input[name=x]").val(), $("input[name=y]").val());
             data.print();
-            createRecntagle(data);
+            createRectangle(data);
             break;
         case "newPage":
             createNewPage($("input[name=pageName]").val(), $("#page_number").val());
