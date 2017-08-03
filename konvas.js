@@ -45,8 +45,29 @@ function createCode(){
                     obj.fontSize = stage.children[j].children[i].attrs.fontSize;
                     obj.fontColor = stage.children[j].children[i].attrs.fill;
                 } else if (obj.type == 'Image'){
-                    obj.img = stage.children[j].children[i].attrs.image.src;
                     obj.id = stage.children[j].children[i].index;
+
+                    if(stage.children[j].children[i].attrs.image.src.includes("http")){
+
+                        console.log("stage: " + stage.children[j].children[i].attrs.image.src);
+                        obj.img = stage.children[j].children[i].attrs.image.src;
+
+                        console.log("obj: " + obj.img);
+
+                    }
+                    else {
+                        var value = stage.children[j].children[i].attrs.image.src
+
+
+
+                        var filename = (value.match(/[^\\/]+\.[^\\/]+$/) || []).pop();
+
+                        console.log(filename);
+
+                        obj.img = 'img/' + filename;
+                    }
+                    
+                    
                 }
                 object_array[i] = obj; 
             }
