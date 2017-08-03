@@ -253,8 +253,8 @@ function addItem(item1, layer_name) {
 }
 
 function destroy() {
+    cur_layer.draw();
     $('#screen').toggle();
-    stage.find('#' + $("input[name=id]").val())[0].destroy();
     prepare();
 }
 
