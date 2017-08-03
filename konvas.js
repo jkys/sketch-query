@@ -48,14 +48,10 @@ function createCode(){
                     obj.img = stage.children[j].children[i].attrs.image.src;
                     obj.id = stage.children[j].children[i].index;
                 }
-
                 object_array[i] = obj; 
             }
-
             createHTML(object_array, j +'.html', j);
             createCSS(object_array, j + '.css');
-            
-
         }
     }
 
@@ -80,59 +76,37 @@ function createCode(){
         }
 
         for(var i = 0; i < object_array.length; i ++){
-
             console.log(object_array[i]);
 
             if(object_array[i].type == 'Text'){
-
                 str+= '<p id = a' + object_array[i].id +'>' + object_array[i].text + '</p>'
-
-            }
-            else if (object_array[i].type == 'Image'){
-
+            } else if (object_array[i].type == 'Image'){
                 str+= '<img id = a' + i + object_array[i].id + ' src=' + object_array[i].img + '>'
-
                 console.log("image :)");
-
             }
         }
         str += '</body></html>';
-
         saveContent(str, object_array.filename_html);
     }
 
     function createCSS(object_array, filename){
-
         var str = '';
 
-        //str += 'body {background-color: linen;}'
-
         for(var i = 0; i < object_array.length; i ++){ 
-
             if(object_array[i].type == 'Text'){
-
                 str+= '#a' + object_array[i].id + '{'; 
-
                 str+= 'position: absolute; left: ' + object_array[i].x + 'px !important; top: ' + object_array[i].y + 'px !important; font-family: ' + object_array[i].fontFamily+ '; font-size: ' + object_array[i].fontSize +  'px !important; color: '+ object_array[i].fontColor+ '; }'
-
-            }
-            else if (object_array[i].type == 'Image'){
-
+            } else if (object_array[i].type == 'Image'){
                 str+= '#a' + i + object_array[i].id + '{'; 
                 str+= 'position: absolute; left: ' + object_array[i].x + 'px; top: ' + object_array[i].y + 'px; height: ' + object_array[i].height + 'px; width: ' + object_array[i].width + 'px;'
                 str += '}';
-
             }
-
+            
             if(stage.children.length > 1){
-
                 // add css for nav bar 
             }
         }
-
-       
         saveContent(str, object_array.filename_css);
-
     }
 
     function newPage(page_number){
@@ -168,7 +142,7 @@ function createCode(){
         layer_name.draw();
         var x = document.getElementsByClassName("tabs");
         console.log(layer_name);
-       cur_layer = layer_name;
+        cur_layer = layer_name;
     }
 
 
@@ -201,13 +175,6 @@ function createCode(){
         stage.add(layer);
     }
 
-    function die() {
-        var kill = $('#destroyNumber').val();
-        var item = stage.find('#' + kill)[0];
-        item.destroy();
-        $('#' + kill).remove();
-    }
-
     function saveContent(fileContents, fileName){
         var link = document.createElement('a');
         link.download = fileName;
@@ -218,18 +185,13 @@ function createCode(){
     function loadTemplate(){
 
         stage.destroyChildren();
-
         var layer = new Konva.Layer();
         stage.add(layer);
-
         cur_layer = layer;
-
         filenames = []; 
-
         filenames[0] = 'Home';
 
         // ALSO DELETE ALL TABS
-
 
         var item = new Konva.Text({
             name: 'item' + item_count,
@@ -256,8 +218,8 @@ function createCode(){
 
             //updates canvas
             cur_layer.draw();
+        });
 
-    });
         item_count++; 
         addItem(item, cur_layer);
 
@@ -286,8 +248,8 @@ function createCode(){
 
             //updates canvas
             cur_layer.draw();
+        });
 
-    });
         item_count++;
         addItem(item, cur_layer);
 
@@ -316,10 +278,8 @@ function createCode(){
 
             //updates canvas
             cur_layer.draw();
+        });
 
-    });
         item_count++;
         addItem(item, cur_layer);
-
-
     }

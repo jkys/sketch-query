@@ -28,10 +28,10 @@ $('#add-item-img').click(function() {
 });
 
 $('#add-item-sq').click(function() {        
-        prepare();
+    prepare();
     Rectangle.setCharacteristics();
-        $('#screen').toggle();
-    });
+    $('#screen').toggle();
+});
 
 $('#add-item-tx').click(function() {  
     prepare();
@@ -51,17 +51,17 @@ function exit() {
 
 function createRecntagle(data) {
     var item = new Konva.Rect({
-            name: 'item' + item_count,
-            x: Math.random() * ((stage.getWidth() - 100) - 10) + 10,
-            y: Math.random() * ((stage.getHeight() - 100) - 10) + 10,
-            id: item_count,
-            width: data.getHeight(),
-            height: data.getWidth(),
-            fill: data.getColor(),
-            stroke: data.getBorder(),
-            strokeWidth: data.getBorderWeight(),
-            draggable: true
-        });
+        name: 'item' + item_count,
+        x: Math.random() * ((stage.getWidth() - 100) - 10) + 10,
+        y: Math.random() * ((stage.getHeight() - 100) - 10) + 10,
+        id: item_count,
+        width: data.getHeight(),
+        height: data.getWidth(),
+        fill: data.getColor(),
+        stroke: data.getBorder(),
+        strokeWidth: data.getBorderWeight(),
+        draggable: true
+    });
 
     item.on('click', function() {
 
@@ -75,35 +75,33 @@ function createRecntagle(data) {
         Rectangle.setCharacteristics(color, width, height, border, borderWeight);
         $('#screen').toggle();
 
-            item.setAttr('height', data.getHeight());
-            item.setAttr('width', data.getWidth());
-            item.setAttr('fill', data.getColor());
-            item.setAttr('stroke', data.getBorder());
-            item.setAttr('strokeWidth', data.getBorderWeight());
+        item.setAttr('height', data.getHeight());
+        item.setAttr('width', data.getWidth());
+        item.setAttr('fill', data.getColor());
+        item.setAttr('stroke', data.getBorder());
+        item.setAttr('strokeWidth', data.getBorderWeight());
 
-            //updates canvas
-            cur_layer.draw();
+        //updates canvas
+        cur_layer.draw();
+    });
 
-        });
-
-        addItem(item, cur_layer);
+    addItem(item, cur_layer);
 }
 
 function createImage(data) {
     var imageObj = new Image();
-
-   imageObj.src = '/img/p1.png';
+    imageObj.src = '/img/p1.png';
    
 
     imageObj.onload = function() {    
 
         var item = new Konva.Image({
-        x: 50,
-        y: 50,
-        image: imageObj,
-        width: widthInput,
-        height: heightInput,
-        draggable: true
+            x: 50,
+            y: 50,
+            image: imageObj,
+            width: widthInput,
+            height: heightInput,
+            draggable: true
         }); 
 
         var url = item.getImage().src;
@@ -111,19 +109,18 @@ function createImage(data) {
         var height = item.height();
 
         item.on('click', function() {
-        prepare();
+            prepare();
 
-        Image.setCharacteristics(url, width, height);
-        $('#screen').toggle();
+            Image.setCharacteristics(url, width, height);
+            $('#screen').toggle();
             item.setAttr('height', data.getHeight());
             item.setAttr('width', data.getWidth());
 
             //updates canvas
             cur_layer.draw();
-
         });
    
-            addItem(item,cur_layer);  
+        addItem(item,cur_layer);  
     };
 
     imageObj.src = '/img/' + prompt("filename");
@@ -186,10 +183,7 @@ function addItem(item1, layer_name) {
 
 function submit() {
     $('#screen').toggle();
-
     var type = $('#locator').val();
-    console.log(type);
-
     var data;
 
     switch(type) {
@@ -219,6 +213,5 @@ function submit() {
         default:
             break;
     }
-
     prepare();
 }
