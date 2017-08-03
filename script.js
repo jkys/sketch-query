@@ -112,7 +112,9 @@ function createImage() {
 }
 
 /**
-* Creates a rectangle box based on data based to it from the module.
+* Creates the rectangle object based on data taken from the module 
+* and adds it to the current layer, then sets a rectangle listener 
+* on it via the setRectangleListener() method.
 */
 function createRectangle(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
@@ -139,6 +141,11 @@ function createRectangle(data) {
     setRectangleListener(item);
 }
 
+/**
+* Sets a listener on a rectangle item which was created in case 
+* it is clicked on. If it is, then it will prompt the module 
+* and have the user enter new data.
+*/
 function setRectangleListener(item) {
     item.on('click', function() {
         prepare();
@@ -149,6 +156,11 @@ function setRectangleListener(item) {
     });
 }
 
+/**
+* Creates the text object based on data taken from the module 
+* and adds it to the current layer, then sets a text listener 
+* on it via the setTextListener() method.
+*/
 function createText(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
     var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
@@ -182,7 +194,11 @@ function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-
+/**
+* Sets a listener on a text item which was created in case 
+* it is clicked on. If it is, then it will prompt the module 
+* and have the user enter new data.
+*/
 function setTextListener(item) {
     item.on('click', function() {
         prepare();
@@ -219,6 +235,10 @@ function destroy() {
     prepare();
 }
 
+/**
+* Called when user clicks the submit button on module to 
+* accept changes or creation to object on the layer.
+*/
 function submit() {
     $('#screen').toggle();
     var type = $('#locator').val(); // Type of object which was just created
