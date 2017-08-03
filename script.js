@@ -41,7 +41,7 @@ $('#add-item-tx').click(function() {
 
 function prepare() {
     $('#module').empty();
-    $('#module').append('<h1 id="data">Characteristics</h1><button id="create" onclick="submit();">Submit</button><button id="clear" onclick="exit();">Exit</button>');
+    $('#module').append('<h1 id="data">Characteristics</h1><button id="create" onclick="submit();">Submit</button><button id="destroy" onclick="destroy();">Destroy</button><button id="clear" onclick="exit();">Exit</button>');
 }
 
 function exit() {
@@ -127,11 +127,12 @@ function createImage(data) {
 }
 
 function createText(data) {
+    var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
+    var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
     var item = new Konva.Text({
         name: 'item' + item_count,
-        x: Math.random() * ((stage.getWidth() - 100) - 10) + 10,
-        y: Math.random() * ((stage.getHeight() - 100) - 10) + 10,
-        
+        x: x,
+        y: y,
         text: data.getText(),
         fontSize: data.getFontSize(),
         fontFamily: data.getFontFamily(),
@@ -140,34 +141,21 @@ function createText(data) {
         draggable: true,
         listening: true
     });
-
-    item.on('click', function() {
-        var text = item.getText();
-        var fontFamily = item.fontFamily();
-        var fontSize = item.fontSize();
-        var color = item.fill();
-        var x = item.x();
-        var y = item.y();
-
-
-        prepare();
-        Text.setCharacteristics(text, fontFamily, fontSize, color);
-        $('#screen').toggle();
-
-        console.log('click ' + JSON.stringify(item));
-
-        item.setAttr('fontSize', data.getFontSize());
-        item.setAttr('fontFamily', data.getFontFamily());
-        item.setAttr('text', data.getText());
-        item.setAttr('fill', data.getColor());
-        item.setAttr('x', x);
-        item.setAttr('y', y);
-
-        //updates canvas
-        cur_layer.draw();
-    });
-
     addItem(item, cur_layer);
+    setListener(item);
+}
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function setListener(item) {
+    item.on('click', function() {
+        prepare();
+        Text.setCharacteristics(item.attrs.text, item.attrs.fontFamily, item.attrs.fontSize, item.attrs.fill, item.attrs.x, item.attrs.y, item.attrs.id);
+        item.destroy();
+        $('#screen').toggle();
+    });
 }
 
 function addItem(item1, layer_name) {
@@ -181,6 +169,12 @@ function addItem(item1, layer_name) {
     }
 }
 
+function destroy() {
+    $('#screen').toggle();
+    stage.find('#' + $("input[name=id]").val())[0].destroy();
+    prepare();
+}
+
 function submit() {
     $('#screen').toggle();
     var type = $('#locator').val();
@@ -189,7 +183,7 @@ function submit() {
     switch(type) {
         case "text":
             data = new Text();
-            data.setValues($("input[name=Color]").val(), $("input[name=FontSize]").val(), $("input[name=FontFamily]").val(), $("input[name=Text]").val());
+            data.setValues($("input[name=Color]").val(), $("input[name=FontSize]").val(), $("input[name=FontFamily]").val(), $("input[name=Text]").val(), $("input[name=x]").val(), $("input[name=y]").val());
             data.print();
             createText(data);
             break;

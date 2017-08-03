@@ -1,9 +1,12 @@
 class Text {
-    setValues(color, fontSize, fontFamily, text) {
+    setValues(color, fontSize, fontFamily, text, x, y, id) {
         this.color = color;
         this.fontSize = fontSize;
         this.fontFamily = fontFamily;
         this.text = text;
+        this.x = x;
+        this.y = y;
+        this.id = id;
     }
 
     static makePrint(name, value) {
@@ -14,7 +17,8 @@ class Text {
         }
 
         if (name == 'Color') {
-        	data = '<div class="content-label"><label>Color</label></div><div class="content-input"><input type="text" id="color" name="Color"></div><script>$(\'#color\').spectrum({color: "' + value + '",preferredFormat: "hex"});</script>';
+            console.log(value);
+        	data = '<div class="content-label"><label>Color</label></div><div class="content-input"><input type="text" id="color" name="Color" value="' + value + '"></div><script>$(\'#color\').spectrum({color: "' + value + '",preferredFormat: "hex"});</script>';
         }
 
 
@@ -22,7 +26,7 @@ class Text {
         return data;
     }
 
-    static setCharacteristics(text, fontFamily, fontSize, color) {
+    static setCharacteristics(text, fontFamily, fontSize, color, x, y, id) {
     	
     	var arr = ['Color', 'FontSize', 'FontFamily', 'Text'];
     	var arr1 = [color, fontSize, fontFamily, text];
@@ -31,12 +35,15 @@ class Text {
     		$('#data').after(Text.makePrint(arr[i], arr1[i]));
     	}
 
+        $('#data').after('<input id="id" type="text" name="id" value="'+ id + '" hidden readonly>');
+        $('#data').after('<input id="x" type="text" name="x" value="'+ x + '" hidden readonly>');
+        $('#data').after('<input id="y" type="text" name="y" value="'+ y + '" hidden readonly>');
         $('#data').after('<input id="locator" type="text" name="type" value="text" hidden readonly>');
         return 1;
     }
 
     print() {
-    	console.log("color: " + this.color + ", " + "fontSize: " + this.fontSize + ", " + "fontFamily: " + this.fontFamily  + ", " + "text: " + this.text);
+    	console.log("color: " + this.color + ", " + "fontSize: " + this.fontSize + ", " + "fontFamily: " + this.fontFamily  + ", " + "text: " + this.text + ", " + "x: " + this.x + ", " + "y: " + this.y);
     }
 
     static fontFamilys() {
@@ -57,6 +64,18 @@ class Text {
 
     getText() {
     	return this.text;
+    }
+
+    getX() {
+        return this.x;
+    }
+
+    getY() {
+        return this.y;
+    }
+
+    getId() {
+        return this.id;
     }
 
 }
