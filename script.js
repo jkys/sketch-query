@@ -5,28 +5,30 @@
 * Wentworth Institute of Technology
 */
 
-var item_count = 0;
-var page_num = 1;
+var item_count = 0; // Amount of objects and serves as a unique ID for each new object
+var page_num = 1; // Amount of pages the user currently has
 
-var width = $('#container').width();
-var height = $('#container').height();
+var width = $('#container').width(); // get width of the encapsulating holder
+var height = $('#container').height(); // get height of the encapsulating holder
 
+// Create Stage based on width.height of screen
 var stage = new Konva.Stage({
     container: 'container',
     width: width,
     height: height
 });
 
-var layer = new Konva.Layer();
-
+var layer = new Konva.Layer(); // Create first layer
 stage.add(layer); // Stage adding first layer
 var cur_layer = layer; // Current layer user is working on
+var filenames = []; // Array to hold names of each file
+filenames[0] = 'Home'; // First file defaults to 'Home'
 
-var filenames = [];
+/************************************** 
 
-filenames[0] = 'Home';
+    Listeners for image/button clicks
 
-/* Listeners for image/button clicks */
+***************************************/
 
 $('#add-item-img').click(function() {
     createImage();
@@ -48,7 +50,11 @@ $('#add-item-tx').click(function() {
     $('#screen').toggle();
 });
 
-/* Functions for user */
+/************************************** 
+
+        Functions for user 
+
+***************************************/
 
 /**
 * Prepares the module to be overlayed on the screen by getting 
@@ -102,9 +108,7 @@ function createImage() {
         var height = item.height();
         addItem(item,cur_layer);  
     };
-
     var str = prompt("enter full filepath");
-
     imageObj.src = str;
 }
 
