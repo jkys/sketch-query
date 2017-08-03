@@ -166,14 +166,13 @@ function createImage() {
     imageObj.src = str;
 }
 
-function createText(data) {
+function createRectangle(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
     var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
     var text = data.getText() == "" ? "Click to edit string" : data.getText();
     var fontSize = data.getFontSize() == "" ? 24 : data.getFontSize();
     var fontFamily = data.getFontFamily() == "" ? "Arial" : data.getFontFamily();
     var color = data.getColor() == "" ? "#000000" : data.getColor();
-
 
     var item = new Konva.Text({
         name: 'item' + item_count,
@@ -188,19 +187,57 @@ function createText(data) {
         listening: true
     });
     addItem(item, cur_layer);
-    setListener(item);
+    setTextListener(item);
 }
 
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-function setListener(item) {
+function setRectangleListener(item) {
     item.on('click', function() {
         prepare();
         Text.setCharacteristics(item.attrs.text, item.attrs.fontFamily, item.attrs.fontSize, item.attrs.fill, item.attrs.x, item.attrs.y, item.attrs.id);
         item.destroy();
         $('#screen').toggle();
+    });
+}
+
+function createText(data) {
+    var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
+    var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
+    var text = data.getText() == "" ? "Click to edit string" : data.getText();
+    var fontSize = data.getFontSize() == "" ? 24 : data.getFontSize();
+    var fontFamily = data.getFontFamily() == "" ? "Arial" : data.getFontFamily();
+    var color = data.getColor() == "" ? "#000000" : data.getColor();
+
+    var item = new Konva.Text({
+        name: 'item' + item_count,
+        x: x,
+        y: y,
+        text: text,
+        fontSize: fontSize,
+        fontFamily: fontFamily,
+        fill: color,
+        id: item_count,
+        draggable: true,
+        listening: true
+    });
+    addItem(item, cur_layer);
+    setTextListener(item);
+}
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function setTextListener(item) {
+    item.on('click', function() {
+        prepare();
+        Text.setCharacteristics(item.attrs.text, item.attrs.fontFamily, item.attrs.fontSize, item.attrs.fill, item.attrs.x, item.attrs.y, item.attrs.id);
+        item.destroy();
+        $('#screen').toggle();
+        cur_layer.draw();
     });
 }
 
