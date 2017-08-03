@@ -106,7 +106,7 @@ function createCode(){
             }
             str += '</div>';
         }
-        str+= '<canvas id="myCanvas" width="980" height="980"></canvas>';
+        str+= '<canvas id="myCanvas'+j+'" width="980" height="980"></canvas>';
 
         for(var i = 0; i < object_array.length; i ++){
             console.log(object_array[i]);
@@ -118,7 +118,7 @@ function createCode(){
                 console.log("image :)");
             }
             else if (object_array[i].type == 'Rect'){
-            str += '<script type="text/javascript">var canvas = document.getElementById("myCanvas"); var context = canvas.getContext("2d"); context.fillStyle = "'+object_array[i].color+ '"; context.fillRect('+object_array[i].x + ', '+ object_array[i].y + ', '+ object_array[i].width +', '+ object_array[i].height+');   </script> '
+            str += '<script type="text/javascript">var canvas = document.getElementById("myCanvas'+j+'"); var context = canvas.getContext("2d"); context.fillStyle = "'+object_array[i].color+ '"; context.fillRect('+object_array[i].x + ', '+ object_array[i].y + ', '+ object_array[i].width +', '+ object_array[i].height+');   </script> '
 
                 
             }
