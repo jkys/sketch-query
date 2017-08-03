@@ -22,9 +22,10 @@ filenames[0] = 'Home';
 
 
 $('#add-item-img').click(function() {
-    prepare();
-    Image.setCharacteristics();
-    $('#screen').toggle();
+    //prepare();
+    //Image.setCharacteristics();
+    //$('#screen').toggle();
+    createImage();
 });
 
 $('#add-item-sq').click(function() {        
@@ -88,27 +89,30 @@ function createRecntagle(data) {
     addItem(item, cur_layer);
 }
 
-function createImage(data) {
+function createImage() {
     var imageObj = new Image();
-    imageObj.src = '/img/p1.png';
-   
+    
+   console.log("in createImage");
 
     imageObj.onload = function() {    
+
+        console.log("winning");
 
         var item = new Konva.Image({
             x: 50,
             y: 50,
             image: imageObj,
-            width: widthInput,
-            height: heightInput,
+            width: 200,
+            height: 200,
             draggable: true
         }); 
 
         var url = item.getImage().src;
         var width = item.width();
         var height = item.height();
-
+ /*
         item.on('click', function() {
+           
             prepare();
 
             Image.setCharacteristics(url, width, height);
@@ -119,11 +123,13 @@ function createImage(data) {
             //updates canvas
             cur_layer.draw();
         });
-   
+   */
         addItem(item,cur_layer);  
     };
 
-    imageObj.src = '/img/' + prompt("filename");
+    var str = prompt("enter full filepath");
+
+    imageObj.src = str;
 }
 
 function createText(data) {
