@@ -1,37 +1,40 @@
-var item_count = 0;
-var page_num = 1;
+/*
+* Authors: Jonathan Keys, Colby Daly
+* Instructor: Durga Suresh
+* SketchQuery 2017
+* Wentworth Institute of Technology
+*/
 
-var width = $('#container').width();
-var height = $('#container').height();
+var item_count = 0; // Amount of objects and serves as a unique ID for each new object
+var page_num = 1; // Amount of pages the user currently has
 
+var width = $('#container').width(); // get width of the encapsulating holder
+var height = $('#container').height(); // get height of the encapsulating holder
+
+// Create Stage based on width.height of screen
 var stage = new Konva.Stage({
     container: 'container',
     width: width,
     height: height
 });
 
-var layer = new Konva.Layer();
+var layer = new Konva.Layer(); // Create first layer
+stage.add(layer); // Stage adding first layer
+var cur_layer = layer; // Current layer user is working on
+var filenames = []; // Array to hold names of each file
+filenames[0] = 'Home'; // First file defaults to 'Home'
 
-stage.add(layer);
+/************************************** 
 
-var cur_layer = layer;
+    Listeners for image/button clicks
 
-var filenames = [];
-
-filenames[0] = 'Home';
-
+***************************************/
 
 $('#add-item-img').click(function() {
-    //prepare();
-    //Image.setCharacteristics();
-    //$('#screen').toggle();
     createImage();
 });
 
 $('#add-item-img-url').click(function() {
-    //prepare();
-    //Image.setCharacteristics();
-    //$('#screen').toggle();
     createImageFromURL();
 });
 
@@ -47,89 +50,48 @@ $('#add-item-tx').click(function() {
     $('#screen').toggle();
 });
 
+/************************************** 
+
+        Functions for user 
+
+***************************************/
+
+/**
+* Prepares the module to be overlayed on the screen by getting 
+* rid of all previous data and adding the title and Submit, 
+* Destroy, and Exit buttons.
+*/
 function prepare() {
     $('#module').empty();
     $('#module').append('<h1 id="data">Characteristics</h1><button id="create" onclick="submit();">Submit</button><button id="destroy" onclick="destroy();">Destroy</button><button id="clear" onclick="exit();">Exit</button>');
 }
 
+/**
+* Toggles the view of the module for when a user exits, this 
+* then calls prepare() to get ready for next used.
+*/
 function exit() {
     $('#screen').toggle();
     prepare();
 }
-
-// function createRecntagle(data) {
-//     var item = new Konva.Rect({
-//         name: 'item' + item_count,
-//         x: Math.random() * ((stage.getWidth() - 100) - 10) + 10,
-//         y: Math.random() * ((stage.getHeight() - 100) - 10) + 10,
-//         id: item_count,
-//         width: data.getHeight(),
-//         height: data.getWidth(),
-//         fill: data.getColor(),
-//         stroke: data.getBorder(),
-//         strokeWidth: data.getBorderWeight(),
-//         draggable: true
-//     });
-
-//     item.on('click', function() {
-
-//         var color = item.fill();
-//         var width = item.width();
-//         var height = item.height();
-//         var border = item.stroke();
-//         var borderWeight = item.strokeWidth();
-
-//         prepare();
-//         Rectangle.setCharacteristics(color, width, height, border, borderWeight);
-//         $('#screen').toggle();
-
-//         item.setAttr('height', data.getHeight());
-//         item.setAttr('width', data.getWidth());
-//         item.setAttr('fill', data.getColor());
-//         item.setAttr('stroke', data.getBorder());
-//         item.setAttr('strokeWidth', data.getBorderWeight());
-
-//         //updates canvas
-//         cur_layer.draw();
-//     });
-
-//     addItem(item, cur_layer);
-// }
-
+/**
+* Creates an Image from the Web URL and posts it to the canvas.
+*/
 function createImageFromURL(){
-
-
-
     var imageURL = prompt("Enter web URL");
-
-
-
-
     Konva.Image.fromURL(imageURL, function(image){
-      // image is Konva.Image instance
-      
-      image.setAttr('height', 300);
-      image.setAttr('x', 50);
-      image.setAttr('y', 50);
-      image.setAttr('width', 300);
-      image.setAttr('draggable', true);
-
-
-      addItem(image, cur_layer);
-
+        image.setAttr('height', 300);
+        image.setAttr('x', 50);
+        image.setAttr('y', 50);
+        image.setAttr('width', 300);
+        image.setAttr('draggable', true);
+        addItem(image, cur_layer);
     });
-
-    
-
 }
 
 function createImage() {
-    var imageObj = new Image();
-    
-   console.log("in createImage");
-
+    var imageObj = new Image();    
     imageObj.onload = function() {    
-
         console.log("winning");
 
         var item = new Konva.Image({
@@ -144,28 +106,15 @@ function createImage() {
         var url = item.getImage().src;
         var width = item.width();
         var height = item.height();
- /*
-        item.on('click', function() {
-           
-            prepare();
-
-            Image.setCharacteristics(url, width, height);
-            $('#screen').toggle();
-            item.setAttr('height', data.getHeight());
-            item.setAttr('width', data.getWidth());
-
-            //updates canvas
-            cur_layer.draw();
-        });
-   */
         addItem(item,cur_layer);  
     };
-
     var str = prompt("enter full filepath");
-
     imageObj.src = str;
 }
 
+/**
+* Creates a rectangle box based on data based to it from the module.
+*/
 function createRectangle(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
     var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
