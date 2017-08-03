@@ -109,8 +109,6 @@ function createCode(){
         str+= '<canvas id="myCanvas" width="980" height="980"></canvas>';
 
         for(var i = 0; i < object_array.length; i ++){
-
-            var rect_flag = 0;
             console.log(object_array[i]);
 
             if(object_array[i].type == 'Text'){
@@ -122,11 +120,7 @@ function createCode(){
             else if (object_array[i].type == 'Rect'){
             str += '<script type="text/javascript">var canvas = document.getElementById("myCanvas"); var context = canvas.getContext("2d"); context.fillStyle = "'+object_array[i].color+ '"; context.fillRect('+object_array[i].x + ', '+ object_array[i].y + ', '+ object_array[i].width +', '+ object_array[i].height+');   </script> '
 
-                rect_flag = 1;
-            }
-            if(rect_flag == 1){
-
-
+                
             }
         }
         str += '</body></html>';
