@@ -47,16 +47,18 @@ function createCode(){
                 } else if (obj.type == 'Image'){
                     obj.id = stage.children[j].children[i].index;
 
-                    if(stage.children[j].children[i].attrs.image.src.includes("http")){
+                    var src = stage.children[j].children[i].attrs.image.src
 
-                        console.log("stage: " + stage.children[j].children[i].attrs.image.src);
-                        obj.img = stage.children[j].children[i].attrs.image.src;
+                    if(src.includes("http") || src.inclues("www") || src.inclues(".com") || src.inclues(".co")){
+
+                        console.log("stage: " + src);
+                        obj.img = src;
 
                         console.log("obj: " + obj.img);
 
                     }
                     else {
-                        var value = stage.children[j].children[i].attrs.image.src
+                        var value = src
 
 
 
