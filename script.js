@@ -169,14 +169,20 @@ function createImage() {
 function createText(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
     var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
+    var text = data.getText() == "" ? "Click to edit string" : data.getText();
+    var fontSize = data.getFontSize() == "" ? 24 : data.getFontSize();
+    var fontFamily = data.getFontFamily() == "" ? "Arial" : data.getFontFamily();
+    var color = data.getColor() == "" ? "#000000" : data.getColor();
+
+
     var item = new Konva.Text({
         name: 'item' + item_count,
         x: x,
         y: y,
-        text: data.getText(),
-        fontSize: data.getFontSize(),
-        fontFamily: data.getFontFamily(),
-        fill: data.getColor(),
+        text: text,
+        fontSize: fontSize,
+        fontFamily: fontFamily,
+        fill: color,
         id: item_count,
         draggable: true,
         listening: true
