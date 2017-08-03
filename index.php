@@ -40,6 +40,12 @@
 			padding: 50px;
 		}
 
+		.button {
+			margin-left: auto;
+			margin-right: auto;
+			width: 115px;
+		}
+
 		button {
 			margin-top: 100px;
 			height: 45px;
@@ -50,7 +56,6 @@
 			cursor: pointer;
 			text-transform: uppercase;
 			font-size: 1.1em;
-			margin-left: 45%;
 		}
 
 		button:hover {
@@ -87,7 +92,9 @@
 		<h2>Get started and create your site today</h2>
 		<p>100% free and always will be</p>
 
-		<a href="tutorial.php"><button>create</button></a>
+		<div class="button">
+			<a href="tutorial.php"><button>create</button></a>
+		</div>
 </div>
 <nav>
 	<a href="index.php">home</a>
