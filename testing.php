@@ -39,6 +39,13 @@
     </div>
     <div class="section" id="container"></div>
 </div>
+<nav>
+    <a href="index.php">home</a>
+    <a href="about.php">about</a>
+    <a href="contact.php">contact</a>
+    <a href="create.php">tutorials</a>
+    <a href="https://bitbucket.org/KeysJ/site_sketchquery">code</a>
+</nav>
 </body>
 <script type="text/javascript" src="konvas.js"></script>
 <script type="text/javascript" src="text.js"></script>
