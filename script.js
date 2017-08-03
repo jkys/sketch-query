@@ -214,6 +214,7 @@ function submit() {
             break;
         case "newPage":
             createNewPage($("input[name=pageName]").val(), $("#page_number").val());
+            cur_layer = stage.children[$("#page_number").val()];
             break;
         default:
             break;
