@@ -133,10 +133,10 @@ function createCode(){
         for(var i = 0; i < object_array.length; i ++){ 
             if(object_array[i].type == 'Text'){
                 str+= '#a' + object_array[i].id + '{'; 
-                str+= 'position: absolute; left: ' + object_array[i].x + 'px !important; top: ' + object_array[i].y + 'px !important; font-family: ' + object_array[i].fontFamily+ '; font-size: ' + object_array[i].fontSize +  'px !important; color: '+ object_array[i].fontColor+ '; }'
+                str+= 'position: absolute; left: ' + (object_array[i].x  / 980) * 100 + '% !important; top: ' + (object_array[i].y / 980) * 100 + '% !important; font-family: ' + object_array[i].fontFamily+ '; font-size: ' + object_array[i].fontSize +  'px !important; color: '+ object_array[i].fontColor+ '; }'
             } else if (object_array[i].type == 'Image'){
                 str+= '#a' + i + object_array[i].id + '{'; 
-                str+= 'position: absolute; left: ' + object_array[i].x + 'px; top: ' + object_array[i].y + 'px; height: ' + object_array[i].height + 'px; width: ' + object_array[i].width + 'px;'
+                str+= 'position: absolute; left: ' + (object_array[i].x / 980) * 100 + '%; top: ' + (object_array[i].y / height) * 100 + '% ; height: ' + object_array[i].height + 'px; width: ' + object_array[i].width + 'px;'
                 str += '}';
             }
             
