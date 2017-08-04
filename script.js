@@ -128,6 +128,8 @@ function createImage(data) {
         item.setAttr('width', (item.originalWidth * ($('#container').width() / 980)));
         item.originalHeight = item.attrs.height; 
         item.setAttr('height', (item.originalHeight * ($('#container').width() / 980)));
+
+        setImageListener(item);
         addItem(item,cur_layer);  
     };
 }
@@ -140,7 +142,7 @@ function createImage(data) {
 function setImageListener(item) {
     item.on('click', function() {
         prepare();
-        Imager.setCharacteristics(item.attrs.fill, item.attrs.width, item.attrs.height, item.attrs.stroke, item.attrs.strokeWidth, item.attrs.x, item.attrs.y, item.attrs.id);
+        Imager.setCharacteristics(item.attrs.image.src, item.attrs.width, item.attrs.height, item.attrs.x, item.attrs.y, item.attrs.id);
         item.destroy();
         $('#screen').toggle();
         cur_layer.draw();
