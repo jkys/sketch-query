@@ -31,7 +31,9 @@ filenames[0] = 'Home'; // First file defaults to 'Home'
 ***************************************/
 
 $('#add-item-img').click(function() {
-    createImage();
+    prepare();
+    Imager.setCharacteristics();
+    $('#screen').toggle();
 });
 
 $('#add-item-img-url').click(function() {
@@ -89,26 +91,48 @@ function createImageFromURL(){
     });
 }
 
+
+/**
+* Creates the image object based on data taken from the module 
+* and adds it to the current layer, then sets a image listener 
+* on it via the setImageListener() method.
+*/
 function createImage() {
-    var imageObj = new Image();    
+    var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
+    var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
+    var url = data.getURL() == "" ? "#" : data.getURL();
+
+    var imageObj = new Image();
+    imageObj.src = url;
     imageObj.onload = function() {    
         
         var item = new Konva.Image({
-            x: 50,
-            y: 50,
+            x: x,
+            y: y,
             image: imageObj,
-            width: 200,
-            height: 200,
-            draggable: true
+            width: data.getWidth(),
+            height: data.getHeight(),
+            draggable: true,
+            listener: true
         }); 
-
-        var url = item.getImage().src;
-        var width = item.width();
-        var height = item.height();
-        addItem(item,cur_layer);  
     };
-    var str = prompt("enter full filepath");
-    imageObj.src = str;
+    addItem(item, cur_layer);
+    setRectangleListener(item);
+}
+
+/**
+* Sets a listener on a image item which was created in case 
+* it is clicked on. If it is, then it will prompt the module 
+* and have the user enter new data.
+*/
+function setImageListener(item) {
+    item.on('click', function() {
+        prepare();
+        Imager.setCharacteristics(item.attrs.fill, item.attrs.width, item.attrs.height, item.attrs.stroke, item.attrs.strokeWidth, item.attrs.x, item.attrs.y, item.attrs.id);
+        item.destroy();
+        $('#screen').toggle();
+        cur_layer.draw();
+    });
 }
 
 /**
@@ -256,8 +280,8 @@ function submit() {
             createText(data);
             break;
         case "image":
-            data = new Image();
-            data.setValues($("input[name=Height]").val(), $("input[name=Width]").val(), $("input[name=Url]").val());
+            data = new Imager();
+            data.setValues($("input[name=Height]").val(), $("input[name=Width]").val(), $("input[name=Url]").val(), $("input[name=x]").val(), $("input[name=y]").val());
             createImage(data);
             break;
         case "rectangle":
