@@ -276,7 +276,7 @@ function submit() {
     switch(type) {
         case "text":
             data = new Text();
-            data.setValues($("input[name=Color]").val(), $("input[name=FontSize]").val(), $("input[name=FontFamily]").val(), $("input[name=Text]").val(), $("input[name=x]").val(), $("input[name=y]").val());
+            data.setValues($("input[name=Color]").val(), $("input[name=FontSize]").val(), $("input[name=FontFamily]").find(":selected").text(), $("input[name=Text]").val(), $("input[name=x]").val(), $("input[name=y]").val());
             createText(data);
             break;
         case "image":
