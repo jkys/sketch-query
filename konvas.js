@@ -10,8 +10,6 @@ function createCode(){
             object_array.filename_css = filenames[j] + '.css'; 
 
             for( var i =0; i < stage.children[j].children.length; i ++){
-
-                // initialize object
                 var obj = new Object();
 
                 obj.id = null;
@@ -24,7 +22,10 @@ function createCode(){
                 obj.height = null;
                 obj.fontSize = null;
                 obj.fontFamily = null;   
-                obj.fontColor = null;    
+                obj.fontColor = null;
+                obj.color = null;
+                obj.border = null;
+                obj.borderWidth = null;
 
 
                 console.log(stage.children[j].children[i]);
@@ -32,24 +33,21 @@ function createCode(){
                 var scale = (980 / width);
                 var scale1 = (980 / height);
 
-
-
                 obj.type = stage.children[j].children[i].className;
                 obj.x = stage.children[j].children[i].attrs.x * scale;
                 obj.y = stage.children[j].children[i].attrs.y * scale1;
                 obj.width = stage.children[j].children[i].originalWidth;
                 obj.height = stage.children[j].children[i].originalHeight;
+                obj.id = stage.children[j].children[i].index;
 
                 console.log(obj.x);
 
                 if(obj.type == 'Text'){
-                    obj.id = stage.children[j].children[i].index;
                     obj.text = stage.children[j].children[i].attrs.text;
                     obj.fontFamily = stage.children[j].children[i].attrs.fontFamily;
                     obj.fontSize = stage.children[j].children[i].attrs.fontSize;
                     obj.fontColor = stage.children[j].children[i].attrs.fill;
                 } else if (obj.type == 'Image'){
-                    obj.id = stage.children[j].children[i].index;
 
                     var src = stage.children[j].children[i].attrs.image.src
 
@@ -57,28 +55,18 @@ function createCode(){
 
                         console.log("stage: " + src);
                         obj.img = src;
-
                         console.log("obj: " + obj.img);
 
-                    }
-                    else {
+                    } else {
                         var value = src
-
-
-
                         var filename = (value.match(/[^\\/]+\.[^\\/]+$/) || []).pop();
-
                         console.log(filename);
-
                         obj.img = 'img/' + filename;
-                    }
-                    
-                    
-                }
-                else if (obj.type = 'Rect'){
-
+                    }          
+                } else if (obj.type = 'Rect'){
                     obj.color = stage.children[j].children[i].attrs.fill;
-
+                    obj.border = stage.children[j].children[i].attrs.stroke;
+                    obj.borderWidth = stage.children[j].children[i].attrs.strokeWidth;
                 }
                 object_array[i] = obj; 
             }
@@ -94,7 +82,7 @@ function createCode(){
         console.log("obj array ->");
         console.log(object_array);
 
-        str += '<!DOCTYPE html><html><head><link rel="stylesheet" href="' + object_array.filename_css + '"><title>Page Title</title></head><body>';
+        str += '<!DOCTYPE html><html><head><link rel="stylesheet" href="' + object_array.filename_css + '"><title>' + filenames[j] + '</title></head><body>';
 
          if(stage.children.length > 1){
 
@@ -102,7 +90,7 @@ function createCode(){
 
             str += '<ul>';
             for(var k = 0; k < stage.children.length; k++){
-                str+= '<li><a href = "' + filenames[k] + '.html" >' + filenames[k] + '</a></li>'
+                str+= '<li><a href="' + filenames[k] + '.html" >' + filenames[k] + '</a></li>'
             }
             str += '</ul>';
         }
@@ -112,15 +100,13 @@ function createCode(){
             console.log(object_array[i]);
 
             if(object_array[i].type == 'Text'){
-                str+= '<p id = a' + object_array[i].id +'>' + object_array[i].text + '</p>'
+                str+= '<p id=a' + object_array[i].id +'>' + object_array[i].text + '</p>'
             } else if (object_array[i].type == 'Image'){
-                str+= '<img id = a' + i + object_array[i].id + ' src=' + object_array[i].img + '>'
+                str+= '<img id=a' + i + object_array[i].id + ' src=' + object_array[i].img + '>'
                 console.log("image :)");
             }
             else if (object_array[i].type == 'Rect'){
-            str += '<script type="text/javascript">var canvas = document.getElementById("myCanvas'+j+'"); var context = canvas.getContext("2d"); context.fillStyle = "'+object_array[i].color+ '"; context.fillRect('+object_array[i].x + ', '+ object_array[i].y + ', '+ object_array[i].width +', '+ object_array[i].height+');   </script> '
-
-                
+                str += '<div id=a' + i + object_array[i].id + '></div>';
             }
         }
         str += '</body></html>';
@@ -133,17 +119,17 @@ function createCode(){
         for(var i = 0; i < object_array.length; i ++){ 
             if(object_array[i].type == 'Text'){
                 str+= '#a' + object_array[i].id + '{'; 
-                str+= 'position: absolute; left: ' + (object_array[i].x  / 980) * 100 + '% !important; top: ' + (object_array[i].y / 980) * 100 + '% !important; font-family: ' + object_array[i].fontFamily+ '; font-size: ' + object_array[i].fontSize +  'px !important; color: '+ object_array[i].fontColor+ '; }'
+                str+= 'position: absolute; left: ' + (object_array[i].x  / 980) * 100 + '% !important; top: ' + (object_array[i].y / 980) * 100 + '% !important; font-family: ' + object_array[i].fontFamily + '; font-size: ' + object_array[i].fontSize +  'px !important; color: ' + object_array[i].fontColor + '; }'
             } else if (object_array[i].type == 'Image'){
                 str+= '#a' + i + object_array[i].id + '{'; 
-                str+= 'position: absolute; left: ' + (object_array[i].x / 980) * 100 + '%; top: ' + (object_array[i].y / 980) * 100 + '% ; height: ' + object_array[i].height + 'px; width: ' + object_array[i].width + 'px;'
-                str += '}';
+                str+= 'position: absolute; left: ' + (object_array[i].x / 980) * 100 + '%; top: ' + (object_array[i].y / 980) * 100 + '% ; height: ' + object_array[i].height + 'px; width: ' + object_array[i].width + 'px;}'
+            } else if (object_array[i].type == 'Rect') {
+                str+= '#a' + i + object_array[i].id + '{'; 
+                str+= 'position: absolute; left: ' + (object_array[i].x  / 980) * 100 + '%; top: ' + (object_array[i].y / 980) * 100 + '%; height: ' + object_array[i].height + 'px; width: ' + object_array[i].width + 'px; background-color: ' + object_array[i].color + '; border: ' + object_array[i].borderWidth + 'px solid ' + object_array[i].border + ';}'
             }
             
             if(stage.children.length > 1){
-
                 str+= 'ul { list-style-type: none; margin: 0; padding:0; width: 200px; background-color: #f1f1f1;} li a { display: block; color: #000; padding: 8px 16px;text-decoration: none;} li a:hover { background-color: #555; color: white; }'
-                // add css for nav bar 
             }
         }
         saveContent(str, object_array.filename_css);
@@ -200,8 +186,6 @@ function createCode(){
             console.log("didnt delete home page we dont want that"); // Don't be a dumbass basically
         }
     }
-
-
 
     function updateThis() {
         var height = $('#updateHeight').val();
