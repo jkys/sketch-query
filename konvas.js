@@ -37,8 +37,8 @@ function createCode(){
                 obj.type = stage.children[j].children[i].className;
                 obj.x = stage.children[j].children[i].attrs.x * scale;
                 obj.y = stage.children[j].children[i].attrs.y * scale1;
-                obj.width = stage.children[j].children[i].attrs.width;
-                obj.height = (stage.children[j].children[i].attrs.height);
+                obj.width = stage.children[j].children[i].originalWidth;
+                obj.height = stage.children[j].children[i].originalHeight;
 
                 console.log(obj.x);
 
@@ -53,7 +53,7 @@ function createCode(){
 
                     var src = stage.children[j].children[i].attrs.image.src
 
-                    if(src.includes("http") || src.inclues("www") || src.inclues(".com") || src.inclues(".co")){
+                    if(src.includes("http") || src.includes("www") || src.includes(".com") || src.includes(".co")){
 
                         console.log("stage: " + src);
                         obj.img = src;

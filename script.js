@@ -88,6 +88,11 @@ function createImageFromURL(){
         image.setAttr('width', 300);
         image.setAttr('draggable', true);
         addItem(image, cur_layer);
+
+        image.originalWidth = image.attrs.width; 
+        image.setAttr('width', (image.originalWidth * ($('#container').width() / 980)));
+        image.originalHeight = image.attrs.height; 
+        image.setAttr('height', (image.originalHeight * ($('#container').width() / 980)));
     });
 }
 
@@ -115,9 +120,22 @@ function createImage() {
             draggable: true,
             listener: true
         }); 
+
+        console.log(item);
+        item.originalWidth = item.attrs.width; 
+        item.setAttr('width', (item.originalWidth * ($('#container').width() / 980)));
+        item.originalHeight = item.attrs.height; 
+        item.setAttr('height', (item.originalHeight * ($('#container').width() / 980)));
+
+        console.log((item.originalHeight * (height / 980)));
+
+        console.log(item);
+
+        var url = item.getImage().src;
+        var width = item.width();
+        var height = item.height();
+        addItem(item,cur_layer);  
     };
-    addItem(item, cur_layer);
-    setRectangleListener(item);
 }
 
 /**
@@ -160,6 +178,11 @@ function createRectangle(data) {
         draggable: true,
         listening: true
     });
+
+    item.originalWidth = item.attrs.width; 
+    item.setAttr('width', (item.originalWidth * ($('#container').width() / 980)));
+    item.originalHeight = item.attrs.height; 
+    item.setAttr('height', (item.originalHeight * ($('#container').width() / 980)));
 
     addItem(item, cur_layer);
     setRectangleListener(item);
@@ -205,6 +228,10 @@ function createText(data) {
         draggable: true,
         listening: true
     });
+    item.originalWidth = item.attrs.width; 
+    item.setAttr('width', (item.originalWidth * ($('#container').width() / 980)));
+    item.originalHeight = item.attrs.height; 
+    item.setAttr('height', (item.originalHeight * ($('#container').width() / 980)));
     addItem(item, cur_layer);
     setTextListener(item);
 }
