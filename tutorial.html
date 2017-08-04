@@ -1,249 +1,175 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SketchQuery | Create</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdn.rawgit.com/konvajs/konva/1.6.2/konva.min.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-	<style type="text/css">
-		body {
-			background-image: url('img/backdrop.jpg');
-			background-size: cover;
-			background-repeat: no-repeat;
-		}
-
-		* {
-			color: #fff;
-			font-family: 'Raleway', sans-serif;
-		}
-
-		h1 {
-			font-family: 'Open Sans', sans-serif;
-			font-size: 4.5em;
-			margin-top: 100px;
-		}
-
-		h1, h2, p {
-			text-align: center;
-		}
-
-		.sidebar {
-			padding-left: 10%;
-			position: absolute;
-			left: 0;
-			width: 100%;
-			top: 0;
-			height: 100%;
-			background-color: rgba(0, 0, 0, .75);
-			
-		}
-
-		.float-text {
-			margin-top: 200px;
-			padding: 50px;
-		}
-
-		button {
-			margin-top: 100px;
-			height: 45px;
-			width: 115px;
-			border: 1px solid #fff;
-			background-color: rgba(0, 0, 0, .3);
-			border-radius: 15px;
-			cursor: pointer;
-			text-transform: uppercase;
-			font-size: 1.1em;
-			margin-left: 45%;
-		}
-
-		button:hover {
-			background-color: rgba(255, 255, 255, .8);
-			color: #000;
-		}
-
-		nav {
-			text-align: center;
-			word-spacing: 60px;
-			letter-spacing: 10px;
-			position: absolute;
-			bottom: 0;
-			width: 100%;
-			height: 50px;
-			left: 0;
-		}
-
-		a {
-			text-decoration: none;
-		}
-
-		nav a {
-			text-decoration: none;
-			text-transform: capitalize;
-			font-size: 1.1em;
-		}
-/*
-		#container {
-        	height: 80%;
-        	width: 80%;
-        	background-color: #fff;
-        	
+    <title>SketchQuery | Tutorials</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
+    <style type="text/css">
+        body {
+            background-image: url('img/backdrop-about.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
         }
-*/
-        .section{
+        * {
+            color: #fff;
+            font-family: 'Raleway', sans-serif;
+        }
 
-            height: 80%;
+        h1 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 4.5em;
+            margin-top: 100px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        p {
             width: 80%;
-            background-color: #fff;
-            
-
+            margin-left: auto;
+            margin-right: auto;
+            text-align: justify;
+            display:flex;
+            align-items:center;
+            color: #000;
+            font-size: 1.4em;
+            justify-content: center ;
         }
 
-
-        #toolbar {
-
+        .sidebar {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            top: 0;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .75);
+            overflow-y: scroll;
+            align-items: center;
+            align-content: center;
         }
 
-        #toolbar {
-        	margin-top: 30px;
-        	height: 30px;
-        	background-color: #eee;
-        	width: 80%;
-        	/*display: inline-block;*/
-        	display: flex;align-items: center;
+        .float-text {
+            margin-top: 200px;
+            padding: 50px;
         }
 
-        .icon {
-        	margin-left: 15px;
-        	cursor: pointer;
-        	height: 20px;
-        	width: 20px;
-        }
-
-        .mod {
-			display: flex;align-items: center;justify-content: center;
-			position: absolute;
-			left: 0;
-			width: 100%;
-			top: 0;
-			height: 100%;
-			background-color: rgba(0, 0, 0, .55);
-        }
-
-        #des {
-        	display: none;
-        	height: 20%;
-        	width: 20%;
-        	background-color: #fff;
-        	border: 1px solid black;
-        	z-index: 99999 !important;
-        }
-        /* Style the tab */
-        .sidebar.toolbar.tab {
-            overflow: hidden;
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
-        }
-
-        /* Style the buttons inside the tab */
-        .sidebar.toolbar.tab button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
+        button {
+            margin-top: 100px;
+            height: 45px;
+            width: 115px;
+            border: 1px solid #fff;
+            background-color: rgba(0, 0, 0, .3);
+            border-radius: 15px;
             cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 1.1em;
+            margin-left: 45%;
         }
 
-        /* Change background color of buttons on hover */
-        .sidebar.toolbar.tab button:hover {
-            background-color: #ddd;
+        button:hover {
+            background-color: rgba(255, 255, 255, .8);
+            color: #000;
         }
 
-        /* Create an active/current tablink class */
-        .sidebar.toolbar.tab button.active {
-            background-color: #ccc;
+        nav {
+            margin-top: 120px;
+            text-align: center;
+            word-spacing: 60px;
+            letter-spacing: 10px;
+            width: 100%;
+            height: 50px;
         }
 
-        /* Style the tab content */
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-            border: 1px solid #ccc;
-            border-top: none;
+        a {
+            text-decoration: none;
         }
 
-        .tabs {
-    width:100%;
-    display:inline-block;
-}
- 
-    /*----- Tab Links -----*/
-    /* Clearfix */
-    .tab-links:after {
-        display:block;
-        clear:both;
-        content:'';
-    }
- 
-    .tab-links li {
-        margin:0px 5px;
-        float:left;
-        list-style:none;
-    }
- 
-        .tab-links a {
-            padding:9px 15px;
-            display:inline-block;
-            border-radius:3px 3px 0px 0px;
-            background:#7FB5DA;
-            font-size:16px;
-            font-weight:600;
-            color:#4c4c4c;
-            transition:all linear 0.15s;
+        nav a {
+            text-decoration: none;
+            text-transform: capitalize;
+            font-size: 1.1em;
         }
- 
-        .tab-links a:hover {
-            background:#a7cce5;
-            text-decoration:none;
+
+        .canvas-img {
+            height: auto;
+            width: 800px;
+            float: right;
+            margin-left: 50px;
         }
- 
-    li.active a, li.active a:hover {
-        background:#fff;
-        color:#4c4c4c;
-    }
- 
-    /*----- Content of Tabs -----*/
 
- 
-        .tab {
-            display:none;
+        .canvas-img {
+            height: auto;
+            width: 800px;
+            margin-left: 50px;
         }
- 
-        .tab.active {
-            display:block;
+
+        .holder {
+            margin-left:auto;
+            margin-right:auto;
+            background-color: rgba(256, 256, 256, .5);
+            padding: 20px;
+            margin-bottom: 50px;
+            width: 80%;
         }
-    #create-code-btn, #create-new-page, #current_layer, #load-template-btn, #delete_layer_btn {
 
-        color:black;
-    }
-
-	</style>
-
+    </style>
 </head>
 <body>
-<div class="mod">
-<div id="des">
-	<button id="click">Click</button>
-</div>
-</div>
+
 <div class="sidebar">
-    <h3>Welcoem to Sketch Query Tutorials!</h3>
-		
-</div>
-<nav>
+        <a href="index.php"><h1>Tutorials</h1></a>
+
+        <div class="holder">
+            <h2 class="section">Welcome, to Sketch Query</h2>
+            <p>
+                Here, you will find helpful guides and insights of how to best navigate the different options of the Sketch Query Application. If the help you are lookign for is not here, please reach out to us at the Contact page and we will be happy to assist you even further!
+            </p>
+        </div>
+
+        <div class="holder">
+            <h2 class="section">Getting Started</h2>
+            <p>
+                To first get started with Sketch Query, head over the the Create page. You will be greeted with an open canvas in which you can get started in right away!
+                <br><br>
+                <img src="img/BlankCanvas.png" class="canvas-img">
+            </p>
+        </div>
+
+        <div class="holder">
+            <h2 class="section">Menu Bar</h2>
+            <p>
+                On the Menu bar there are multiple different options you can choose from. Each one will let you use different tools to be able to create your website from.
+                <br><br>
+                <img src="img/MenuBar1.png" class="canvas-img">
+            </p>
+        </div>
+
+        <div class="holder">
+            <h2 class="section">Text Tool</h2>
+            <p>
+                The Text tool allows you to add text anywhere you want on the canvas, you can choose the color, font type, and size of the font to be placed - and then can drag and drop it anywhere you see fit.
+                <br><br>
+                <img src="img/MenuBar2.png" class="canvas-img">
+            </p>
+        </div>
+
+        <div class="holder">
+            <h2 class="section">Text Tool Input</h2>
+            <p>
+                <br><br>
+                <img src="img/Modal2.png" class="canvas-img-alone">
+            </p>
+        </div>
+        
+
+        <br>
+        <br>
+
+        <nav>
     <a href="index.html">home</a>
     <a href="about.html">about</a>
     <a href="create.html">create</a>
@@ -251,5 +177,6 @@
     <a href="tutorial.html">tutorials</a>
     <a href="https://bitbucket.org/KeysJ/site_sketchquery">code</a>
 </nav>
+</div>
 </body>
 </html>
