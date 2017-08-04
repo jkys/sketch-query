@@ -112,11 +112,19 @@ body {
 
 #module button {
     cursor: pointer;
+    font-weight: bold;
 }
 
+#module input {
+    min-width: 250px;
+}
 .content-input, .content-label {
     display: inline-block;
     width: auto;
+}
+
+#create, #destroy {
+    width: 150px;
 }
 
 .content-input {
@@ -158,4 +166,9 @@ nav a {
 	text-decoration: none;
 	text-transform: capitalize;
 	font-size: 1.1em;
+}
+
+.sp-replacer.sp-light {
+    float: left;
+    margin-right: 10px;
 }

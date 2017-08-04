@@ -17,8 +17,10 @@ class Text {
         }
 
         if (name == 'Color') {
-            console.log(value);
-        	data = '<div class="content-label"><label>Color</label></div><div class="content-input"><input type="text" id="color" name="Color" value="' + value + '"></div><script>$(\'#color\').spectrum({color: "' + value + '",preferredFormat: "hex"});</script>';
+            if (value == "") {
+                value = "#000000";
+            }
+        	data = '<div class="content-label"><label>Color</label></div><div class="content-input"><input type="text" id="color" name="Color" value="' + value + '"></div><script>$(\'#color\').spectrum({color: "' + value + '",preferredFormat: "hex"});$(\'#color\').show();</script>';
         }
 
 
