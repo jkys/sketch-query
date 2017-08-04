@@ -228,10 +228,7 @@ function createText(data) {
         draggable: true,
         listening: true
     });
-    item.originalWidth = item.attrs.width; 
-    item.setAttr('width', (item.originalWidth * ($('#container').width() / 980)));
-    item.originalHeight = item.attrs.height; 
-    item.setAttr('height', (item.originalHeight * ($('#container').width() / 980)));
+
     addItem(item, cur_layer);
     setTextListener(item);
 }
