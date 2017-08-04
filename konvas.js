@@ -136,7 +136,7 @@ function createCode(){
                 str+= 'position: absolute; left: ' + (object_array[i].x  / 980) * 100 + '% !important; top: ' + (object_array[i].y / 980) * 100 + '% !important; font-family: ' + object_array[i].fontFamily+ '; font-size: ' + object_array[i].fontSize +  'px !important; color: '+ object_array[i].fontColor+ '; }'
             } else if (object_array[i].type == 'Image'){
                 str+= '#a' + i + object_array[i].id + '{'; 
-                str+= 'position: absolute; left: ' + (object_array[i].x / 980) * 100 + '%; top: ' + (object_array[i].y / height) * 100 + '% ; height: ' + object_array[i].height + 'px; width: ' + object_array[i].width + 'px;'
+                str+= 'position: absolute; left: ' + (object_array[i].x / 980) * 100 + '%; top: ' + (object_array[i].y / 980) * 100 + '% ; height: ' + object_array[i].height + 'px; width: ' + object_array[i].width + 'px;'
                 str += '}';
             }
             
