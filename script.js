@@ -78,26 +78,6 @@ function exit() {
     $('#screen').toggle();
     prepare();
 }
-/**
-* Creates an Image from the Web URL and posts it to the canvas.
-*/
-function createImageFromURL(){
-    var imageURL = prompt("Enter web URL");
-    Konva.Image.fromURL(imageURL, function(image){
-        image.setAttr('height', 300);
-        image.setAttr('x', 50);
-        image.setAttr('y', 50);
-        image.setAttr('width', 300);
-        image.setAttr('draggable', true);
-        addItem(image, cur_layer);
-
-        image.originalWidth = image.attrs.width; 
-        image.setAttr('width', (image.originalWidth * ($('#container').width() / 980)));
-        image.originalHeight = image.attrs.height; 
-        image.setAttr('height', (image.originalHeight * ($('#container').width() / 980)));
-    });
-}
-
 
 /**
 * Creates the image object based on data taken from the module 
@@ -128,6 +108,8 @@ function createImage(data) {
         item.setAttr('width', (item.originalWidth * ($('#container').width() / 980)));
         item.originalHeight = item.attrs.height; 
         item.setAttr('height', (item.originalHeight * ($('#container').width() / 980)));
+
+        setImageListener(item);
         addItem(item,cur_layer);  
     };
 }
@@ -140,7 +122,7 @@ function createImage(data) {
 function setImageListener(item) {
     item.on('click', function() {
         prepare();
-        Imager.setCharacteristics(item.attrs.fill, item.attrs.width, item.attrs.height, item.attrs.stroke, item.attrs.strokeWidth, item.attrs.x, item.attrs.y, item.attrs.id);
+        Imager.setCharacteristics(item.attrs.image.src, item.attrs.width, item.attrs.height, item.attrs.x, item.attrs.y, item.attrs.id);
         item.destroy();
         $('#screen').toggle();
         cur_layer.draw();

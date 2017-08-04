@@ -11,23 +11,19 @@ class Rectangle {
     }
 
     static makePrint(name, value) {
+        console.log(name);
     	if (value == undefined) { value = "";}
         var data = '<div class="content-label"><label>' + name + '</label></div><div class="content-input"><input type="text" name="' + name + '" value="' + value + '"></div>';
+        if (name == 'Color' || name == 'Border') {
+            if (value == "") { value = "#000000";}
+        	data = '<div class="content-label"><label>' + name + '</label></div><div class="content-input"><input type="text" id="' + name + '" name="' + name + '" value="' + value + '"></div><script>$(\'#' + name + '\').spectrum({color: "' + value + '",preferredFormat: "hex"});$(\'#' + name + '\').show();</script>';
+        }
         
-        if (name == 'Color') {
-        	data = '<div class="content-label"><label>Color</label></div><div class="content-input"><input type="text" id="color" name="Color"></div><script>$(\'#color\').spectrum({color: "' + value + '",preferredFormat: "hex"});</script>';
-        }
-
-        if (name == 'Border') {
-        	data = '<div class="content-label"><label>Border</label></div><div class="content-input"><input type="text" id="border" name="Color"></div><script>$(\'#border\').spectrum({color: "' + value + '",preferredFormat: "hex"});</script>';
-        }
-
-
         data += '<div class="divider"></div><div class="divider"></div>';
         return data;
     }
 
-    static setCharacteristics(color, width, height, border, borderWeight, x, y, id) {
+    static setCharacteristics(height, width, color, border, borderWeight, x, y, id) {
     	
     	var arr = ['Height', 'Width', 'Color', 'Border', 'BorderWeight'];
     	var arr1 = [height, width, color, border, borderWeight];
