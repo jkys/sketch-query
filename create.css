@@ -13,16 +13,17 @@ body {
 }
 
 .main {
-	margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
+    position: absolute;
+	top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: #fff;
-    height: 600px;
-    width: 80%;
+    height: 70%;
+    width: 70%;
 }
 
 .section {
-    height: 70%;
+    height: 100%;
     width: 100%;
     background-color: #fff;
 }

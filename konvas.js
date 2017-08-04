@@ -37,17 +37,11 @@ function createCode() {
              * obj.borderWidth: Used by -> Rectangle
             */
 
-
-            console.log(stage.children[j].children[i]);
-
-            var scale_X = (980 / width);
-            var scale_Y = (980 / height);
-
             // Set object values for the one which are for all of them.
             obj.id = stage.children[j].children[i].index;
             obj.type = stage.children[j].children[i].className;
-            obj.x = stage.children[j].children[i].attrs.x * scale_X;
-            obj.y = stage.children[j].children[i].attrs.y * scale_Y;
+            obj.x = stage.children[j].children[i].attrs.x;
+            obj.y = stage.children[j].children[i].attrs.y;
 
 
             // Set unique fields to their respective objects
@@ -64,8 +58,8 @@ function createCode() {
 
                 // Image Object
                 case 'Image':
-                    obj.width = stage.children[j].children[i].originalWidth;
-                    obj.height = stage.children[j].children[i].originalHeight;
+                    obj.width = stage.children[j].children[i].attrs.width;
+                    obj.height = stage.children[j].children[i].attrs.height;
 
                     var src = stage.children[j].children[i].attrs.image.src
 
@@ -87,8 +81,8 @@ function createCode() {
 
                 // Rectangle Object
                 case 'Rect':
-                    obj.width = stage.children[j].children[i].originalWidth;
-                    obj.height = stage.children[j].children[i].originalHeight;
+                    obj.width = stage.children[j].children[i].attrs.width;
+                    obj.height = stage.children[j].children[i].attrs.height;
                     obj.color = stage.children[j].children[i].attrs.fill;
                     obj.border = stage.children[j].children[i].attrs.stroke;
                     obj.borderWidth = stage.children[j].children[i].attrs.strokeWidth;
@@ -144,19 +138,21 @@ function createHTML(object_array, filename, j) {
 * would be Text, Image, or Rectangle
 */
 function createCSS(object_array, filename) {
+    var stage_width = $('#container').width();
+    var stage_height = $('#container').height();
     var str = '';
 
     // For each object in the layer, add its CSS styles to the CSS file, denoted by the objects link.
     for (var i = 0; i < object_array.length; i ++) { 
         if (object_array[i].type == 'Text') {
             str+= '#a' + object_array[i].id + '{'; 
-            str+= 'position: absolute; left: ' + (object_array[i].x  / 980) * 100 + '% !important; top: ' + (object_array[i].y / 980) * 100 + '% !important; font-family: ' + object_array[i].fontFamily + '; font-size: ' + object_array[i].fontSize +  'px !important; color: ' + object_array[i].fontColor + '; }'
+            str+= 'position: absolute; left: ' + (object_array[i].x / stage_width) * 100 + '% !important; top: ' + (object_array[i].y / stage_height) * 100 + '% !important; font-family: ' + object_array[i].fontFamily + '; font-size: ' + object_array[i].fontSize + 'px !important; color: ' + object_array[i].fontColor + '; }'
         } else if (object_array[i].type == 'Image') {
             str+= '#a' + object_array[i].id + '{'; 
-            str+= 'position: absolute; left: ' + (object_array[i].x / 980) * 100 + '%; top: ' + (object_array[i].y / 980) * 100 + '% ; height: ' + object_array[i].height + 'px; width: ' + object_array[i].width + 'px;}'
+            str+= 'position: absolute; left: ' + (object_array[i].x / stage_width) * 100 + '%; top: ' + (object_array[i].y / stage_height) * 100 + '% ; height: ' + ((object_array[i].height / stage_height) * 100) + '%; width: ' + ((object_array[i].width / stage_width) * 100) + '%;}'
         } else if (object_array[i].type == 'Rect') {
             str+= '#a' + object_array[i].id + '{'; 
-            str+= 'position: absolute; left: ' + (object_array[i].x  / 980) * 100 + '%; top: ' + (object_array[i].y / 980) * 100 + '%; height: ' + object_array[i].height + 'px; width: ' + object_array[i].width + 'px; background-color: ' + object_array[i].color + '; border: ' + object_array[i].borderWidth + 'px solid ' + object_array[i].border + ';}'
+            str+= 'position: absolute; left: ' + (object_array[i].x / stage_width) * 100 + '%; top: ' + (object_array[i].y / stage_height) * 100 + '%; height: ' + ((object_array[i].height / stage_height) * 100) + '%; width: ' + ((object_array[i].width / stage_width) * 100) + '%; background-color: ' + object_array[i].color + '; border: ' + object_array[i].borderWidth + 'px solid ' + object_array[i].border + ';}'
         }
         
         // If the page has more than one page, add styling for navigation box.
@@ -167,19 +163,22 @@ function createCSS(object_array, filename) {
     saveContent(str, object_array.filename_css); // Save string to CSS file.
 }
 
+/**
+* Function used to create a new page/layer 
+* for the user to have multiple pages.
+*/
 function newPage(page_number) {
-    stage.clear();
-    var layer = new Konva.Layer();
-    stage.add(layer);
+    stage.clear(); // Clear the stage
+    var layer = new Konva.Layer(); // Create a new layer
+    stage.add(layer); // Add the layer to the stage
 
-    prepare();
-    NewPage.setCharacteristics(page_number);
-    $('#screen').toggle();
+    prepare(); // Prepare the module
+    NewPage.setCharacteristics(page_number); // Get new info for the page
+    $('#screen').toggle(); // Hide the module
 }
 
 function createNewPage(name, page_number) {
     var layer_name = name;
-
 
     document.getElementById('current_layer').innerHTML = layer_name;
     filenames[page_number] = layer_name; 
@@ -217,18 +216,6 @@ function removeLayer() {
     } else{
         console.log("didnt delete home page we dont want that"); // Don't be a dumbass basically
     }
-}
-
-function updateThis() {
-    var height = $('#updateHeight').val();
-    var width = $('#updateWidth').val();
-    var itemId = $('#destroyNumber').val();
-
-    var item = stage.find('#' + itemId)[0];
-    item.attrs.height = height;
-    item.attrs.width = width;
-    layer.add(item);
-    stage.add(layer);
 }
 
 function saveContent(fileContents, fileName) {

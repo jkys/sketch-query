@@ -102,13 +102,7 @@ function createImage(data) {
             draggable: true,
             listener: true
         }); 
-
-        console.log(item);
-        item.originalWidth = item.attrs.width; 
-        item.setAttr('width', (item.originalWidth * ($('#container').width() / 980)));
-        item.originalHeight = item.attrs.height; 
-        item.setAttr('height', (item.originalHeight * ($('#container').width() / 980)));
-
+        
         setImageListener(item);
         addItem(item,cur_layer);  
     };
@@ -140,6 +134,8 @@ function createRectangle(data) {
     var color = data.getColor() == "" ? "#000000" : data.getColor();
     var border = data.getBorder() == "" ? "#000000" : data.getBorder();
     var borderWeight = !Number.isNaN(data.getBorderWeight()) ? 1 : data.getBorderWeight();
+    console.log(data.getWidth());
+    console.log(data.getHeight());
 
     var item = new Konva.Rect({
         name: 'item' + item_count,
@@ -155,11 +151,6 @@ function createRectangle(data) {
         listening: true
     });
 
-    item.originalWidth = item.attrs.width; 
-    item.setAttr('width', (item.originalWidth * ($('#container').width() / 980)));
-    item.originalHeight = item.attrs.height; 
-    item.setAttr('height', (item.originalHeight * ($('#container').width() / 980)));
-
     addItem(item, cur_layer);
     setRectangleListener(item);
 }
@@ -172,7 +163,7 @@ function createRectangle(data) {
 function setRectangleListener(item) {
     item.on('click', function() {
         prepare();
-        Rectangle.setCharacteristics(item.attrs.fill, item.attrs.width, item.attrs.height, item.attrs.stroke, item.attrs.strokeWidth, item.attrs.x, item.attrs.y, item.attrs.id);
+        Rectangle.setCharacteristics(item.attrs.height, item.attrs.width, item.attrs.fill, item.attrs.stroke, item.attrs.strokeWidth, item.attrs.x, item.attrs.y, item.attrs.id);
         item.destroy();
         $('#screen').toggle();
         cur_layer.draw();
