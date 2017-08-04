@@ -61,25 +61,6 @@ $('#add-item-tx').click(function() {
 ***************************************/
 
 /**
-* Prepares the module to be overlayed on the screen by getting 
-* rid of all previous data and adding the title and Submit, 
-* Destroy, and Exit buttons.
-*/
-function prepare() {
-    $('#module').empty();
-    $('#module').append('<button type="button"  style="float: right;" class="btn btn-info" id="clear" onclick="exit();"><strong>X</strong></button><div class="divider"></div><h1 id="data">Characteristics</h1><button type="button" class="btn btn-success" id="create" onclick="submit();">Submit</button><button type="button" class="btn btn-danger" id="destroy" onclick="destroy();">Destroy</button>');
-}
-
-/**
-* Toggles the view of the module for when a user exits, this 
-* then calls prepare() to get ready for next used.
-*/
-function exit() {
-    $('#screen').toggle();
-    prepare();
-}
-
-/**
 * Creates the image object based on data taken from the module 
 * and adds it to the current layer, then sets a image listener 
 * on it via the setImageListener() method.
@@ -102,7 +83,7 @@ function createImage(data) {
             draggable: true,
             listener: true
         }); 
-        
+
         setImageListener(item);
         addItem(item,cur_layer);  
     };
@@ -134,8 +115,6 @@ function createRectangle(data) {
     var color = data.getColor() == "" ? "#000000" : data.getColor();
     var border = data.getBorder() == "" ? "#000000" : data.getBorder();
     var borderWeight = !Number.isNaN(data.getBorderWeight()) ? 1 : data.getBorderWeight();
-    console.log(data.getWidth());
-    console.log(data.getHeight());
 
     var item = new Konva.Rect({
         name: 'item' + item_count,
@@ -230,13 +209,8 @@ function setTextListener(item) {
 */
 function addItem(item1, layer_name) {
     layer_name.add(item1);
-    console.log(stage);
     layer_name.draw();
-    console.log("layer is " + JSON.stringify(layer_name));
     item_count++;
-    for (var i = 0; i < item1.length; i++) {
-        console.log(item1[i]);
-    }
 }
 
 /**
@@ -248,6 +222,25 @@ function destroy() {
     cur_layer.draw();
     $('#screen').toggle();
     prepare();
+}
+
+/**
+* Toggles the view of the module for when a user exits, this 
+* then calls prepare() to get ready for next used.
+*/
+function exit() {
+    $('#screen').toggle();
+    prepare();
+}
+
+/**
+* Prepares the module to be overlayed on the screen by getting 
+* rid of all previous data and adding the title and Submit, 
+* Destroy, and Exit buttons.
+*/
+function prepare() {
+    $('#module').empty();
+    $('#module').append('<button type="button"  style="float: right;" class="btn btn-info" id="clear" onclick="exit();"><strong>X</strong></button><div class="divider"></div><h1 id="data">Characteristics</h1><button type="button" class="btn btn-success" id="create" onclick="submit();">Submit</button><button type="button" class="btn btn-danger" id="destroy" onclick="destroy();">Destroy</button>');
 }
 
 /**

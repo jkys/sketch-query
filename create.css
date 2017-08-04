@@ -164,7 +164,7 @@ a {
 }
 
 nav a {
-	text-decoration: none;
+	text-decoration: none !important;
 	text-transform: capitalize;
 	font-size: 1.1em;
 }

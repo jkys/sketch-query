@@ -11,7 +11,6 @@ class Rectangle {
     }
 
     static makePrint(name, value) {
-        console.log(name);
     	if (value == undefined) { value = "";}
         var data = '<div class="content-label"><label>' + name + '</label></div><div class="content-input"><input type="text" name="' + name + '" value="' + value + '"></div>';
         if (name == 'Color' || name == 'Border') {
@@ -37,10 +36,6 @@ class Rectangle {
         $('#data').after('<input id="y" type="text" name="y" value="'+ y + '" hidden readonly>');
         $('#data').after('<input id="locator" type="text" name="type" value="rectangle" hidden readonly>');
         return 1;
-    }
-
-    print() {
-    	console.log("height: " + this.height + ", " + "width: " + this.width + ", " + "color: " + this.color + ", " + "border: " + this.border + ", " + "borderWeight: " + this.borderWeight );
     }
 
     getHeight() {

@@ -65,14 +65,11 @@ function createCode() {
 
                     if (src.includes("http") || src.includes("www") || src.includes(".com") || src.includes(".co")) {
 
-                        console.log("stage: " + src);
                         obj.img = src;
-                        console.log("obj: " + obj.img);
 
                     } else {
                         var value = src
                         var filename = (value.match(/[^\\/]+\.[^\\/]+$/) || []).pop();
-                        console.log(filename);
                         obj.img = 'img/' + filename;
                     }
                     break;
@@ -146,13 +143,13 @@ function createCSS(object_array, filename) {
     for (var i = 0; i < object_array.length; i ++) { 
         if (object_array[i].type == 'Text') {
             str+= '#a' + object_array[i].id + '{'; 
-            str+= 'position: absolute; left: ' + (object_array[i].x / stage_width) * 100 + '% !important; top: ' + (object_array[i].y / stage_height) * 100 + '% !important; font-family: ' + object_array[i].fontFamily + '; font-size: ' + object_array[i].fontSize + 'px !important; color: ' + object_array[i].fontColor + '; }'
+            str+= 'position: absolute; left: ' + ((object_array[i].x / stage_width) * 100) + '% !important; top: ' + ((object_array[i].y / stage_height) * 100) + '% !important; font-family: ' + object_array[i].fontFamily + '; font-size: ' + object_array[i].fontSize + 'px !important; color: ' + object_array[i].fontColor + '; }'
         } else if (object_array[i].type == 'Image') {
             str+= '#a' + object_array[i].id + '{'; 
-            str+= 'position: absolute; left: ' + (object_array[i].x / stage_width) * 100 + '%; top: ' + (object_array[i].y / stage_height) * 100 + '% ; height: ' + ((object_array[i].height / stage_height) * 100) + '%; width: ' + ((object_array[i].width / stage_width) * 100) + '%;}'
+            str+= 'position: absolute; left: ' + ((object_array[i].x / stage_width) * 100) + '%; top: ' + ((object_array[i].y / stage_height) * 100) + '% ; height: ' + ((object_array[i].height / stage_height) * 100) + '%; width: ' + ((object_array[i].width / stage_width) * 100) + '%;}'
         } else if (object_array[i].type == 'Rect') {
             str+= '#a' + object_array[i].id + '{'; 
-            str+= 'position: absolute; left: ' + (object_array[i].x / stage_width) * 100 + '%; top: ' + (object_array[i].y / stage_height) * 100 + '%; height: ' + ((object_array[i].height / stage_height) * 100) + '%; width: ' + ((object_array[i].width / stage_width) * 100) + '%; background-color: ' + object_array[i].color + '; border: ' + object_array[i].borderWidth + 'px solid ' + object_array[i].border + ';}'
+            str+= 'position: absolute; left: ' + ((object_array[i].x / stage_width) * 100) + '%; top: ' + ((object_array[i].y / stage_height) * 100) + '%; height: ' + ((object_array[i].height / stage_height) * 100) + '%; width: ' + ((object_array[i].width / stage_width) * 100) + '%; background-color: ' + object_array[i].color + '; border: ' + object_array[i].borderWidth + 'px solid ' + object_array[i].border + ';}'
         }
         
         // If the page has more than one page, add styling for navigation box.
@@ -182,7 +179,6 @@ function createNewPage(name, page_number) {
 
     document.getElementById('current_layer').innerHTML = layer_name;
     filenames[page_number] = layer_name; 
-    console.log(filenames);
     $('#pages').append('<div class="box" id="f' + page_number + '"><button onclick="$(\'#current_layer\').html($(\'#pgn' + page_number + '\').text());"><a id="pgn' + page_number + '" href="javascript:openCity(stage.children[' + page_number + ']);"> ' +layer_name+ ' </a></button></div>');
     cur_layer = layer;
     page_num++;
@@ -198,7 +194,6 @@ function openCity(layer_name) {
     stage.clear();
     layer_name.draw();
     var x = document.getElementsByClassName("tabs");
-    console.log(layer_name);
     cur_layer = layer_name;
 }
 
@@ -209,12 +204,10 @@ function removeLayer() {
         filenames.splice(cur_layer.index, 1); // Not sure what this does - Jon
         cur_layer.destroy(); //  Destroys the current layer from Konvas
         $('#f' + cur_layer.index).remove(); // Removes the tab from the DOM
-        console.log(stage); // Print stage
         openHome(stage.children[0]); // Not sure what this does - Jon, Open home layer?
         cur_layer = stage.children[0]; // Not sure what this does - Jon, Set current layer to home?
         $('#current_layer').html('Home'); // Update current tag DOM to Home
     } else{
-        console.log("didnt delete home page we dont want that"); // Don't be a dumbass basically
     }
 }
 
@@ -248,7 +241,6 @@ function loadTemplate() {
     });
 
     item.on('click', function() {
-        console.log('click ' + JSON.stringify(item));
         var changeFont = prompt("font change= ");
         item.setAttr('fontSize', changeFont);
         cur_layer.draw();
@@ -271,7 +263,6 @@ function loadTemplate() {
     });
 
     item.on('click', function() {
-        console.log('click ' + JSON.stringify(item));
         var changeFont = prompt("font change= ");
         item.setAttr('fontSize', changeFont);
         cur_layer.draw();
@@ -294,7 +285,6 @@ function loadTemplate() {
     });
 
     item.on('click', function() {
-        console.log('click ' + JSON.stringify(item));
         var changeFont = prompt("font change= ");
         item.setAttr('fontSize', changeFont);
         cur_layer.draw();

@@ -31,10 +31,6 @@ class Imager {
         return 1;
     }
 
-    print() {
-    	console.log("height: " + this.height + ", " + "width: " + this.width + ", " + "url: " + this.url );
-    }
-
     getHeight() {
     	return this.height;
     }
