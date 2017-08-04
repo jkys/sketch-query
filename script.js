@@ -37,7 +37,9 @@ $('#add-item-img').click(function() {
 });
 
 $('#add-item-img-url').click(function() {
-    createImageFromURL();
+    prepare();
+    Imager.setCharacteristics();
+    $('#screen').toggle();
 });
 
 $('#add-item-sq').click(function() {        
@@ -126,14 +128,6 @@ function createImage(data) {
         item.setAttr('width', (item.originalWidth * ($('#container').width() / 980)));
         item.originalHeight = item.attrs.height; 
         item.setAttr('height', (item.originalHeight * ($('#container').width() / 980)));
-
-        console.log((item.originalHeight * (height / 980)));
-
-        console.log(item);
-
-        var url = item.getImage().src;
-        var width = item.width();
-        var height = item.height();
         addItem(item,cur_layer);  
     };
 }
