@@ -111,11 +111,6 @@ body {
 }
 
 #module button {
-    border-radius: 5px;
-    border: none;
-    padding: 6px;
-    background-color: #6A6F69;
-    color: #fff;
     cursor: pointer;
 }
 

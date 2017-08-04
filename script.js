@@ -65,7 +65,7 @@ $('#add-item-tx').click(function() {
 */
 function prepare() {
     $('#module').empty();
-    $('#module').append('<h1 id="data">Characteristics</h1><button id="create" onclick="submit();">Submit</button><button id="destroy" onclick="destroy();">Destroy</button><button id="clear" onclick="exit();">Exit</button>');
+    $('#module').append('<h1 id="data">Characteristics</h1><button type="button" class="btn btn-success" id="create" onclick="submit();">Submit</button><button type="button" class="btn btn-danger" id="destroy" onclick="destroy();">Destroy</button><button type="button" class="btn btn-info" id="clear" onclick="exit();">Exit</button>');
 }
 
 /**
