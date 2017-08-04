@@ -100,11 +100,11 @@ function createCode(){
 
             console.log("multiple pages");
 
-            str += '<div class = "topnav">';
+            str += '<ul>';
             for(var k = 0; k < stage.children.length; k++){
-                str+= '<a href = "' + filenames[k] + '.html" >' + k + '</a> </br>'
+                str+= '<li><a href = "' + filenames[k] + '.html" >' + filenames[k] + '</a></li>'
             }
-            str += '</div>';
+            str += '</ul>';
         }
         str+= '<canvas id="myCanvas'+j+'" width="980" height="980"></canvas>';
 
@@ -141,6 +141,8 @@ function createCode(){
             }
             
             if(stage.children.length > 1){
+
+                str+= 'ul { list-style-type: none; margin: 0; padding:0; width: 200px; background-color: #f1f1f1;} li a { display: block; color: #000; padding: 8px 16px;text-decoration: none;} li a:hover { background-color: #555; color: white; }'
                 // add css for nav bar 
             }
         }
