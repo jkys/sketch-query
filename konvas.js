@@ -231,15 +231,11 @@ function createCode(){
         filenames = []; 
         filenames[0] = 'Home';
 
-        // ALSO DELETE ALL TABS
-
         var item = new Konva.Text({
             name: 'item' + item_count,
             x: 300,
             y: 10,
-            //text: 'Testing',
             text: 'Website Name',
-            //fontSize: Math.random() * (30 - 10) + 10,
             fontSize: 60,
             fontFamily: 'Calibri',
             fill: 'red',
@@ -251,12 +247,7 @@ function createCode(){
         item.on('click', function() {
             console.log('click ' + JSON.stringify(item));
             var changeFont = prompt("font change= ");
-            //var fontSize = text.fontSize();
-            //text.fontSize(changeFont);
-                         // event     // value
             item.setAttr('fontSize', changeFont);
-
-            //updates canvas
             cur_layer.draw();
         });
 
@@ -267,9 +258,7 @@ function createCode(){
             name: 'item' + item_count,
             x: 350,
             y: 60,
-            //text: 'Testing',
             text: 'Phone number: ',
-            //fontSize: Math.random() * (30 - 10) + 10,
             fontSize: 30,
             fontFamily: 'Calibri',
             fill: 'black',
@@ -281,12 +270,7 @@ function createCode(){
         item.on('click', function() {
             console.log('click ' + JSON.stringify(item));
             var changeFont = prompt("font change= ");
-            //var fontSize = text.fontSize();
-            //text.fontSize(changeFont);
-                         // event     // value
             item.setAttr('fontSize', changeFont);
-
-            //updates canvas
             cur_layer.draw();
         });
 
@@ -297,9 +281,7 @@ function createCode(){
             name: 'item' + item_count,
             x: 350,
             y: 85,
-            //text: 'Testing',
             text: 'Address: ',
-            //fontSize: Math.random() * (30 - 10) + 10,
             fontSize: 30,
             fontFamily: 'Calibri',
             fill: 'black',
@@ -311,12 +293,7 @@ function createCode(){
         item.on('click', function() {
             console.log('click ' + JSON.stringify(item));
             var changeFont = prompt("font change= ");
-            //var fontSize = text.fontSize();
-            //text.fontSize(changeFont);
-                         // event     // value
             item.setAttr('fontSize', changeFont);
-
-            //updates canvas
             cur_layer.draw();
         });
 
