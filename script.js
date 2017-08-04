@@ -102,7 +102,7 @@ function createImageFromURL(){
 * and adds it to the current layer, then sets a image listener 
 * on it via the setImageListener() method.
 */
-function createImage() {
+function createImage(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
     var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
     var url = data.getURL() == "" ? "#" : data.getURL();

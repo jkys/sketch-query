@@ -43,7 +43,7 @@ class Imager {
     	return this.width;
     }
 
-    getUrl() {
+    getURL() {
     	return this.url;
     }
 
