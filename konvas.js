@@ -227,69 +227,37 @@ function loadTemplate() {
     filenames = []; 
     filenames[0] = 'Home';
 
-    var item = new Konva.Text({
-        name: 'item' + item_count,
-        x: 300,
-        y: 10,
-        text: 'Website Name',
-        fontSize: 60,
-        fontFamily: 'Calibri',
-        fill: 'red',
-        id: item_count,
-        draggable: true,
-        listening: true
-    });
 
-    item.on('click', function() {
-        var changeFont = prompt("font change= ");
-        item.setAttr('fontSize', changeFont);
-        cur_layer.draw();
-    });
+    data = new Rectangle();
+    data.setValues(100, 500, '#000', '#fff', 0, 0, 0);
+    createRectangle(data);
 
-    item_count++; 
-    addItem(item, cur_layer);
+    data = new Rectangle();
+    data.setValues(200, 250, '#999', '#fff', 0, 0, 0);
+    createRectangle(data);
 
-    var item = new Konva.Text({
-        name: 'item' + item_count,
-        x: 350,
-        y: 60,
-        text: 'Phone number: ',
-        fontSize: 30,
-        fontFamily: 'Calibri',
-        fill: 'black',
-        id: item_count,
-        draggable: true,
-        listening: true
-    });
+    data = new Rectangle();
+    data.setValues(200, 250, '#999', '#fff', 0, 0, 0);
+    createRectangle(data);
 
-    item.on('click', function() {
-        var changeFont = prompt("font change= ");
-        item.setAttr('fontSize', changeFont);
-        cur_layer.draw();
-    });
+    data = new Text();
+    data.setValues('#fff', 36, 'Arial', 'Site Name', 10, 10);
+    createText(data);
 
-    item_count++;
-    addItem(item, cur_layer);
+    data = new Text();
+    data.setValues('#fff', 24, 'Arial', 'Site Gen Info', 30, 30);
+    createText(data);
 
-    var item = new Konva.Text({
-        name: 'item' + item_count,
-        x: 350,
-        y: 85,
-        text: 'Address: ',
-        fontSize: 30,
-        fontFamily: 'Calibri',
-        fill: 'black',
-        id: item_count,
-        draggable: true,
-        listening: true
-    });
+    data = new Text();
+    data.setValues('#fff', 14, 'Arial', 'Hours', 100, 30);
+    createText(data);
 
-    item.on('click', function() {
-        var changeFont = prompt("font change= ");
-        item.setAttr('fontSize', changeFont);
-        cur_layer.draw();
-    });
+    data = new Text();
+    data.setValues('#fff', 14, 'Arial', 'M-F: 10AM - 5PM', 100, 30);
+    createText(data);
 
-    item_count++;
-    addItem(item, cur_layer);
+    data = new Text();
+    data.setValues('#fff', 14, 'Arial', 'Weekends: 10AM - 10PM', 100, 30);
+    createText(data);
+
 }
