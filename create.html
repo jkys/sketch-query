@@ -19,19 +19,19 @@
 <div class="main">
     <div class="menu">
         <div class="items">
-            <div class="box"><img class="icon" id="add-item-tx" src="img/tx.png"></div>
-            <div class="box"><img class="icon" id="add-item-sq" src="img/sq.png"></div>
-            <div class="box"><img class="icon" type = "file" id="add-item-img" src="img/img.png"></div>
-            <div class="box"><img class="icon" type = "file" id="add-item-img-url" src="img/www.png"></div>
+            <div class="box"><img title="Click to add text" class="icon" id="add-item-tx" src="img/tx.png"></div>
+            <div class="box"><img title="Click to add a rectangle" class="icon" id="add-item-sq" src="img/sq.png"></div>
+            <div class="box"><img title="Click to add an image from your computer" class="icon" type = "file" id="add-item-img" src="img/img.png"></div>
+            <div class="box"><img title="Click to add an image from the internet" class="icon" type = "file" id="add-item-img-url" src="img/www.png"></div>
         </div>
         <div class="current">
-            <div class="box"><button id="current_layer">Home</button></div>
-            <div class="box"><button id="delete_layer_btn" style="background-color: rgba(0, 0, 0, 0); !important; margin-left: -10px !important; color: black;" onclick="removeLayer();">X</button></div>
+            <div class="box"><button id="current_layer" title="Current working page">Home</button></div>
+            <div class="box"><button id="delete_layer_btn" style="background-color: rgba(0, 0, 0, 0); !important; margin-left: -10px !important; color: black;" onclick="removeLayer();" title="Delete current page">X</button></div>
         </div>
         <div class="buttons">
-            <div class="box"><button onclick="newPage(page_num);">New Page</button></div>
-            <div class="box"><button onclick="loadTemplate();">Load Page</button></div>
-            <div class="box create"><button onclick="createCode();">Create Site</button></div>
+            <div class="box"><button title="Click to create another page" onclick="newPage(page_num);">New Page</button></div>
+            <div class="box"><button title="Click to load a tempalte" onclick="loadTemplate();">Load Page</button></div>
+            <div class="box create"><button title="Click to create your site!" onclick="createCode();">Create Site</button></div>
         </div>
     </div>
     <div class="menu">
