@@ -78,26 +78,6 @@ function exit() {
     $('#screen').toggle();
     prepare();
 }
-/**
-* Creates an Image from the Web URL and posts it to the canvas.
-*/
-function createImageFromURL(){
-    var imageURL = prompt("Enter web URL");
-    Konva.Image.fromURL(imageURL, function(image){
-        image.setAttr('height', 300);
-        image.setAttr('x', 50);
-        image.setAttr('y', 50);
-        image.setAttr('width', 300);
-        image.setAttr('draggable', true);
-        addItem(image, cur_layer);
-
-        image.originalWidth = image.attrs.width; 
-        image.setAttr('width', (image.originalWidth * ($('#container').width() / 980)));
-        image.originalHeight = image.attrs.height; 
-        image.setAttr('height', (image.originalHeight * ($('#container').width() / 980)));
-    });
-}
-
 
 /**
 * Creates the image object based on data taken from the module 
