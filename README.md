@@ -46,7 +46,7 @@ See also the list of [contributors](https://github.com/jkys/sketch-query/graphs/
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/jkys/sketch-queryLICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/jkys/sketch-query/LICENSE.md) file for details
 
 ## Acknowledgments
 
