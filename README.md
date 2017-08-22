@@ -1,3 +1,14 @@
-# SketchyQuery #
+# Sketch-query
 
-SketchQuery is a web application that builds other websites for users who do not know how to or do not wish to program a web application. The ideal user would be creating a personal website or a website for a small business in which the only need for a website is for general information rather than functionality. For example, a site which provides information such as location, hours, possible short about page, contact information, and a pdf menu. The problem in which this project will solve is for the small business owners which do not have the time, know-how, or ability to design and create a web page on their own. Users will drag and drop a variety of web components onto a blank web canvas and style it to fit their website’s needs. When the user is finished, a button can be pressed, and the source code will be generated based on the web components dragged and dropped onto the canvas. The source code can then be downloaded (.html, .css, .js, .php), allowing the user to upload the files to the web server without writing a single line of code. This project aims to have a simple design and will allow a website to be built in less than 1 hour. In addition to the original proposal, a few templates will be available to users to make site creation faster.
+This document will provide details regarding the web application Sketch-query, providing details on the application summary, details of files, terminology, as well as technical details regarding the building of the application.
+
+**Creators:** Jonathan Keys (BCOS '17) and Colby Daly (BCOS '17)
+**Professor:** Professor Suresh
+**Initial Release:** August 14, 2017
+**School:** Wentworth Institute of Technology, Boston, MA
+
+## Summary
+
+Sketch-query is a web application which aids user with little to now web development experience in creating their own static web pages. This project is aimed at users who require a web page for basic uses such as a local restaurant, barber shop, church, and many more common usages. The aim of sketch-query is to get the local business a step on the Internet to be able to compete with bigger chains which have a strong on-line presence.
+
+## Components
