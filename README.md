@@ -1,6 +1,6 @@
 # Sketch-query
 
-This document will provide details regarding the web application Sketch-query, providing details on the application summary, details of files, terminology, as well as technical details regarding the building of the application.
+This document will provide details regarding the web application Sketch-query, providing details on the application summary, details of files, terminology, as well as technical details regarding the development of the application.
 
 ## Getting Started
 Sketch-query can be cloned using both HTTPS and SSH via git commands.
@@ -13,17 +13,17 @@ To download and be able to make edits to the Sketch-query project you will need 
 
 Navigate in your terminal/command-prompt to the folder in which you would like to store the application.
 
-In your terminal/command-prompt type in `git clone https://github.com/jkys/sketch-query.git` and hit `enter` or `return` to start downloading all the files into the select folder.
+In your terminal/command-prompt type in `git clone https://github.com/jkys/sketch-query.git` and press `enter` or `return` to start downloading all the files into the select folder.
 
 ### SSH
 
 Navigate in your terminal/command-prompt to the folder in which you would like to store the application.
 
-In your terminal/command-prompt type in `git clone git@github.com:jkys/sketch-query.git` and hit `enter` or `return` to start downloading all the files into the select folder.
+In your terminal/command-prompt type in `git clone git@github.com:jkys/sketch-query.git` and press `enter` or `return` to start downloading all the files into the select folder.
 
 ## Summary
 
-Sketch-query is a web application which aids user with little to now web development experience in creating their own static web pages. This project is aimed at users who require a web page for basic uses such as a local restaurant, barber shop, church, and many more common usages. The aim of sketch-query is to get the local business a step on the Internet to be able to compete with bigger chains which have a strong on-line presence.
+Sketch-query is a web application which aids users with little to no web development experience in creating their own static web pages. This project is aimed at users who require a web page for basic uses such as a local restaurant, barber shop, church, and many more common usages. The aim of sketch-query is to give the local business a space on the Internet to be able to compete with bigger chains which have a strong on-line presence.
 
 ## Built With
 
