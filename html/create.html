@@ -4,21 +4,23 @@
     <title>SketchQuery | Create</title>
     <script src="../js/imports/jquery.min.js"></script>
     <script src="../js/imports/konva.min.js"></script>
-    <link rel="stylesheet" href="../css/imports/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="../css/imports/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="../css/imports/fonts/Raleway" rel="stylesheet">
   	<link href="../css/imports/fonts/Open_Sans" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../css/create.css">
-    <link rel="stylesheet" type="text/css" href="../css/spectrum.css">
+    <link href="../css/create.css" rel="stylesheet">
+    <link href="../css/spectrum.css" rel="stylesheet">
 </head>
 <body>
-  <div id="screen"><div id="module"></div></div>
+  <div id="screen">
+    <div id="module"></div>
+  </div>
   <div class="main">
       <div class="menu">
           <div class="items">
-              <div class="box"><img title="Click to add text" class="icon" id="add-item-tx" src="img/tx.png"></div>
-              <div class="box"><img title="Click to add a rectangle" class="icon" id="add-item-sq" src="img/sq.png"></div>
-              <div class="box"><img title="Click to add an image from your computer" class="icon" type = "file" id="add-item-img" src="img/img.png"></div>
-              <div class="box"><img title="Click to add an image from the internet" class="icon" type = "file" id="add-item-img-url" src="img/www.png"></div>
+              <div class="box"><img title="Click to add text" class="icon" id="add-item-tx" src="../img/icons/tx.png"></div>
+              <div class="box"><img title="Click to add a rectangle" class="icon" id="add-item-sq" src="../img/icons/sq.png"></div>
+              <div class="box"><img title="Click to add an image from your computer" class="icon" type = "file" id="add-item-img" src="../img/icons/img.png"></div>
+              <div class="box"><img title="Click to add an image from the internet" class="icon" type = "file" id="add-item-img-url" src="../img/icons/www.png"></div>
           </div>
           <div class="current">
               <div class="box"><button id="current_layer" title="Current working page">Home</button></div>
@@ -46,11 +48,11 @@
       <a href="https://github.com/jkys/sketch-query">code</a>
   </nav>
 </body>
-<script src="../js/konvas.js"></script>
-<script src="../js/text.js"></script>
-<script src="../js/newPage.js"></script>
-<script src="../js/image.js"></script>
-<script src="../js/rectangle.js"></script>
-<script src="../js/script.js"></script>
-<script src="../js/spectrum.js"></script>
+<script src="../js/scripts/konvas.js"></script>
+<script src="../js/classes/text.js"></script>
+<script src="../js/classes/newPage.js"></script>
+<script src="../js/classes/image.js"></script>
+<script src="../js/classes/rectangle.js"></script>
+<script src="../js/scripts/script.js"></script>
+<script src="../js/imports/spectrum.js"></script>
 </html>
