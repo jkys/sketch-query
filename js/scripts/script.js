@@ -1,9 +1,9 @@
 /*
-* Authors: Jonathan Keys, Colby Daly
-* Instructor: Durga Suresh
-* SketchQuery 2017
-* Wentworth Institute of Technology
-*/
+ * Authors: Jonathan Keys, Colby Daly
+ * Instructor: Durga Suresh
+ * SketchQuery 2017
+ * Wentworth Institute of Technology
+ */
 
 var item_count = 0; // Amount of objects and serves as a unique ID for each new object
 var page_num = 1; // Amount of pages the user currently has
@@ -24,7 +24,7 @@ var cur_layer = layer; // Current layer user is working on
 var filenames = []; // Array to hold names of each file
 filenames[0] = 'Home'; // First file defaults to 'Home'
 
-/************************************** 
+/**************************************
 
     Listeners for image/button clicks
 
@@ -42,29 +42,29 @@ $('#add-item-img-url').click(function() {
     $('#screen').toggle();
 });
 
-$('#add-item-sq').click(function() {        
+$('#add-item-sq').click(function() {
     prepare();
     Rectangle.setCharacteristics();
     $('#screen').toggle();
 });
 
-$('#add-item-tx').click(function() {  
+$('#add-item-tx').click(function() {
     prepare();
     Text.setCharacteristics();
     $('#screen').toggle();
 });
 
-/************************************** 
+/**************************************
 
-        Functions for user 
+        Functions for user
 
 ***************************************/
 
 /**
-* Creates the image object based on data taken from the module 
-* and adds it to the current layer, then sets a image listener 
-* on it via the setImageListener() method.
-*/
+ * Creates the image object based on data taken from the module
+ * and adds it to the current layer, then sets a image listener
+ * on it via the setImageListener() method.
+ */
 function createImage(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
     var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
@@ -72,8 +72,8 @@ function createImage(data) {
 
     var imageObj = new Image();
     imageObj.src = url;
-    imageObj.onload = function() {    
-        
+    imageObj.onload = function() {
+
         var item = new Konva.Image({
             x: x,
             y: y,
@@ -82,18 +82,18 @@ function createImage(data) {
             height: data.getHeight(),
             draggable: true,
             listener: true
-        }); 
+        });
 
         setImageListener(item);
-        addItem(item,cur_layer);  
+        addItem(item, cur_layer);
     };
 }
 
 /**
-* Sets a listener on a image item which was created in case 
-* it is clicked on. If it is, then it will prompt the module 
-* and have the user enter new data.
-*/
+ * Sets a listener on a image item which was created in case
+ * it is clicked on. If it is, then it will prompt the module
+ * and have the user enter new data.
+ */
 function setImageListener(item) {
     item.on('click', function() {
         prepare();
@@ -105,10 +105,10 @@ function setImageListener(item) {
 }
 
 /**
-* Creates the rectangle object based on data taken from the module 
-* and adds it to the current layer, then sets a rectangle listener 
-* on it via the setRectangleListener() method.
-*/
+ * Creates the rectangle object based on data taken from the module
+ * and adds it to the current layer, then sets a rectangle listener
+ * on it via the setRectangleListener() method.
+ */
 function createRectangle(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
     var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
@@ -135,10 +135,10 @@ function createRectangle(data) {
 }
 
 /**
-* Sets a listener on a rectangle item which was created in case 
-* it is clicked on. If it is, then it will prompt the module 
-* and have the user enter new data.
-*/
+ * Sets a listener on a rectangle item which was created in case
+ * it is clicked on. If it is, then it will prompt the module
+ * and have the user enter new data.
+ */
 function setRectangleListener(item) {
     item.on('click', function() {
         prepare();
@@ -150,10 +150,10 @@ function setRectangleListener(item) {
 }
 
 /**
-* Creates the text object based on data taken from the module 
-* and adds it to the current layer, then sets a text listener 
-* on it via the setTextListener() method.
-*/
+ * Creates the text object based on data taken from the module
+ * and adds it to the current layer, then sets a text listener
+ * on it via the setTextListener() method.
+ */
 function createText(data) {
     var x = !Number.isNaN(data.getX()) ? 10 : data.getX();
     var y = !Number.isNaN(data.getY()) ? 10 : data.getY();
@@ -180,19 +180,19 @@ function createText(data) {
 }
 
 /**
-* Check if a given value is a number or not.
-* True: is number
-* True: is not a number
-*/
+ * Check if a given value is a number or not.
+ * True: is number
+ * True: is not a number
+ */
 function isNumeric(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
+    return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 /**
-* Sets a listener on a text item which was created in case 
-* it is clicked on. If it is, then it will prompt the module 
-* and have the user enter new data.
-*/
+ * Sets a listener on a text item which was created in case
+ * it is clicked on. If it is, then it will prompt the module
+ * and have the user enter new data.
+ */
 function setTextListener(item) {
     item.on('click', function() {
         prepare();
@@ -204,9 +204,9 @@ function setTextListener(item) {
 }
 
 /*
-* Adds the current created item onto a specified layer, 
-* then redraws the layer to show all changes made.
-*/
+ * Adds the current created item onto a specified layer,
+ * then redraws the layer to show all changes made.
+ */
 function addItem(item1, layer_name) {
     layer_name.add(item1);
     layer_name.draw();
@@ -214,10 +214,10 @@ function addItem(item1, layer_name) {
 }
 
 /**
-* Redraws the current layer to update the element which 
-* was previously destroyed (destroyed in each objects 
-* listener on each edit)
-*/
+ * Redraws the current layer to update the element which
+ * was previously destroyed (destroyed in each objects
+ * listener on each edit)
+ */
 function destroy() {
     cur_layer.draw();
     $('#screen').toggle();
@@ -225,39 +225,39 @@ function destroy() {
 }
 
 /**
-* Toggles the view of the module for when a user exits, this 
-* then calls prepare() to get ready for next used.
-*/
+ * Toggles the view of the module for when a user exits, this
+ * then calls prepare() to get ready for next used.
+ */
 function exit() {
     $('#screen').toggle();
     prepare();
 }
 
 /**
-* Prepares the module to be overlayed on the screen by getting 
-* rid of all previous data and adding the title and Submit, 
-* Destroy, and Exit buttons.
-*/
+ * Prepares the module to be overlayed on the screen by getting
+ * rid of all previous data and adding the title and Submit,
+ * Destroy, and Exit buttons.
+ */
 function prepare() {
     $('#module').empty();
     $('#module').append('<button type="button"  style="float: right;" class="btn btn-info" id="clear" onclick="exit();"><strong>X</strong></button><div class="divider"></div><h1 id="data">Characteristics</h1><button type="button" class="btn btn-success" id="create" onclick="submit();">Submit</button><button type="button" class="btn btn-danger" id="destroy" onclick="destroy();">Destroy</button>');
 }
 
 /**
-* Called when user clicks the submit button on module to 
-* accept changes or creation to object on the layer.
-*/
+ * Called when user clicks the submit button on module to
+ * accept changes or creation to object on the layer.
+ */
 function submit() {
     $('#screen').toggle();
     var type = $('#locator').val(); // Type of object which was just created
     var data;
 
     /*
-    * Switch case used to traverse through the type of object which was 
-    * created and give it all its necessary data to then invoke each's 
-    * custom create method.
-    */
-    switch(type) {
+     * Switch case used to traverse through the type of object which was
+     * created and give it all its necessary data to then invoke each's
+     * custom create method.
+     */
+    switch (type) {
         case "text":
             data = new Text();
             data.setValues($("input[name=Color]").val(), $("input[name=FontSize]").val(), $("input[name=FontFamily]").find(":selected").text(), $("input[name=Text]").val(), $("input[name=x]").val(), $("input[name=y]").val());

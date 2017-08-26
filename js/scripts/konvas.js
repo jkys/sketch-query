@@ -1,19 +1,18 @@
-
 /**
-* Function is responsible for looping through all pages/layers
-* and objects to then convert each one to their CSS and HTML
-* counterparts through the respective method calls.
-*/
+ * Function is responsible for looping through all pages/layers
+ * and objects to then convert each one to their CSS and HTML
+ * counterparts through the respective method calls.
+ */
 function createCode() {
     // Loop through each layer/page the user has
     for (var j = 0; j < stage.children.length; j++) {
 
-        var object_array = [];  // Create object for each layer/page for files
+        var object_array = []; // Create object for each layer/page for files
         object_array.filename_html = filenames[j] + '.html'; // Create html file
-        object_array.filename_css = filenames[j] + '.css';  // Create css file
+        object_array.filename_css = filenames[j] + '.css'; // Create css file
 
-        // Loop through each object on the given layer/page
-        for (var i =0; i < stage.children[j].children.length; i ++) {
+        // Loopthrough each object on the given layer/page
+        for (var i = 0; i < stage.children[j].children.length; i++) {
             var obj = new Object(); // Create object to hold all values
 
             /*
@@ -35,7 +34,7 @@ function createCode() {
              * obj.color: Used by -> Rectangle
              * obj.border: Used by -> Rectangle
              * obj.borderWidth: Used by -> Rectangle
-            */
+             */
 
             // Set object values for the one which are for all of them.
             obj.id = stage.children[j].children[i].index;
@@ -54,9 +53,9 @@ function createCode() {
                     obj.fontSize = stage.children[j].children[i].attrs.fontSize;
                     obj.fontColor = stage.children[j].children[i].attrs.fill;
                     break;
-            /**********************************************************************************/
+                    /**********************************************************************************/
 
-                // Image Object
+                    // Image Object
                 case 'Image':
                     obj.width = stage.children[j].children[i].attrs.width;
                     obj.height = stage.children[j].children[i].attrs.height;
@@ -74,9 +73,9 @@ function createCode() {
                     }
                     break;
 
-            /**********************************************************************************/
+                    /**********************************************************************************/
 
-                // Rectangle Object
+                    // Rectangle Object
                 case 'Rect':
                     obj.width = stage.children[j].children[i].attrs.width;
                     obj.height = stage.children[j].children[i].attrs.height;
@@ -94,10 +93,10 @@ function createCode() {
 }
 
 /**
-* Given an object, convert the different values/classes
-* into their respective HTML counteraprts, whether that
-* would be Text, Image, or Rectangle
-*/
+ * Given an object, convert the different values/classes
+ * into their respective HTML counteraprts, whether that
+ * would be Text, Image, or Rectangle
+ */
 function createHTML(object_array, filename, j) {
 
     // Create the starting opening to a file and link its CSS file, as well as create the title name for the page.
@@ -107,18 +106,18 @@ function createHTML(object_array, filename, j) {
     if (stage.children.length > 1) {
         str += '<ul>';
         for (var k = 0; k < stage.children.length; k++) {
-            str+= '<li><a href="' + filenames[k] + '.html" >' + filenames[k] + '</a></li>'
+            str += '<li><a href="' + filenames[k] + '.html" >' + filenames[k] + '</a></li>'
         }
         str += '</ul>';
     }
 
-    for (var i = 0; i < object_array.length; i ++) {
-        switch(object_array[i].type) {
+    for (var i = 0; i < object_array.length; i++) {
+        switch (object_array[i].type) {
             case 'Text':
-                str+= '<p id=a' + object_array[i].id + '>' + object_array[i].text + '</p>'
+                str += '<p id=a' + object_array[i].id + '>' + object_array[i].text + '</p>'
                 break;
             case 'Image':
-                str+= '<img id=a' + object_array[i].id + ' src=' + object_array[i].img + '>'
+                str += '<img id=a' + object_array[i].id + ' src=' + object_array[i].img + '>'
                 break;
             case 'Rect':
                 str += '<div id=a' + object_array[i].id + '></div>';
@@ -130,40 +129,40 @@ function createHTML(object_array, filename, j) {
 }
 
 /**
-* Given an object, convert the different values/classes
-* into their respective CSS counteraprts, whether that
-* would be Text, Image, or Rectangle
-*/
+ * Given an object, convert the different values/classes
+ * into their respective CSS counteraprts, whether that
+ * would be Text, Image, or Rectangle
+ */
 function createCSS(object_array, filename) {
     var stage_width = $('#container').width();
     var stage_height = $('#container').height();
     var str = '';
 
     // For each object in the layer, add its CSS styles to the CSS file, denoted by the objects link.
-    for (var i = 0; i < object_array.length; i ++) {
+    for (var i = 0; i < object_array.length; i++) {
         if (object_array[i].type == 'Text') {
-            str+= '#a' + object_array[i].id + '{';
-            str+= 'position: absolute; left: ' + ((object_array[i].x / stage_width) * 100) + '% !important; top: ' + ((object_array[i].y / stage_height) * 100) + '% !important; font-family: ' + object_array[i].fontFamily + '; font-size: ' + object_array[i].fontSize + 'px !important; color: ' + object_array[i].fontColor + '; }'
+            str += '#a' + object_array[i].id + '{';
+            str += 'position: absolute; left: ' + ((object_array[i].x / stage_width) * 100) + '% !important; top: ' + ((object_array[i].y / stage_height) * 100) + '% !important; font-family: ' + object_array[i].fontFamily + '; font-size: ' + object_array[i].fontSize + 'px !important; color: ' + object_array[i].fontColor + '; }'
         } else if (object_array[i].type == 'Image') {
-            str+= '#a' + object_array[i].id + '{';
-            str+= 'position: absolute; left: ' + ((object_array[i].x / stage_width) * 100) + '%; top: ' + ((object_array[i].y / stage_height) * 100) + '% ; height: ' + ((object_array[i].height / stage_height) * 100) + '%; width: ' + ((object_array[i].width / stage_width) * 100) + '%;}'
+            str += '#a' + object_array[i].id + '{';
+            str += 'position: absolute; left: ' + ((object_array[i].x / stage_width) * 100) + '%; top: ' + ((object_array[i].y / stage_height) * 100) + '% ; height: ' + ((object_array[i].height / stage_height) * 100) + '%; width: ' + ((object_array[i].width / stage_width) * 100) + '%;}'
         } else if (object_array[i].type == 'Rect') {
-            str+= '#a' + object_array[i].id + '{';
-            str+= 'position: absolute; left: ' + ((object_array[i].x / stage_width) * 100) + '%; top: ' + ((object_array[i].y / stage_height) * 100) + '%; height: ' + ((object_array[i].height / stage_height) * 100) + '%; width: ' + ((object_array[i].width / stage_width) * 100) + '%; background-color: ' + object_array[i].color + '; border: ' + object_array[i].borderWidth + 'px solid ' + object_array[i].border + ';}'
+            str += '#a' + object_array[i].id + '{';
+            str += 'position: absolute; left: ' + ((object_array[i].x / stage_width) * 100) + '%; top: ' + ((object_array[i].y / stage_height) * 100) + '%; height: ' + ((object_array[i].height / stage_height) * 100) + '%; width: ' + ((object_array[i].width / stage_width) * 100) + '%; background-color: ' + object_array[i].color + '; border: ' + object_array[i].borderWidth + 'px solid ' + object_array[i].border + ';}'
         }
 
         // If the page has more than one page, add styling for navigation box.
         if (stage.children.length > 1) {
-            str+= 'ul { list-style-type: none; margin: 0; padding:0; width: 200px; background-color: #f1f1f1;} li a { display: block; color: #000; padding: 8px 16px;text-decoration: none;} li a:hover { background-color: #555; color: white; }'
+            str += 'ul { list-style-type: none; margin: 0; padding:0; width: 200px; background-color: #f1f1f1;} li a { display: block; color: #000; padding: 8px 16px;text-decoration: none;} li a:hover { background-color: #555; color: white; }'
         }
     }
     saveContent(str, object_array.filename_css); // Save string to CSS file.
 }
 
 /**
-* Function used to create a new page/layer
-* for the user to have multiple pages.
-*/
+ * Function used to create a new page/layer
+ * for the user to have multiple pages.
+ */
 function newPage(page_number) {
     stage.clear(); // Clear the stage
     var layer = new Konva.Layer(); // Create a new layer
@@ -179,7 +178,7 @@ function createNewPage(name, page_number) {
 
     document.getElementById('current_layer').innerHTML = layer_name;
     filenames[page_number] = layer_name;
-    $('#pages').append('<div class="box" id="f' + page_number + '"><button onclick="$(\'#current_layer\').html($(\'#pgn' + page_number + '\').text());"><a id="pgn' + page_number + '" href="javascript:openCity(stage.children[' + page_number + ']);"> ' +layer_name+ ' </a></button></div>');
+    $('#pages').append('<div class="box" id="f' + page_number + '"><button onclick="$(\'#current_layer\').html($(\'#pgn' + page_number + '\').text());"><a id="pgn' + page_number + '" href="javascript:openCity(stage.children[' + page_number + ']);"> ' + layer_name + ' </a></button></div>');
     cur_layer = layer;
     page_num++;
 }
@@ -207,8 +206,7 @@ function removeLayer() {
         openHome(stage.children[0]); // Not sure what this does - Jon, Open home layer?
         cur_layer = stage.children[0]; // Not sure what this does - Jon, Set current layer to home?
         $('#current_layer').html('Home'); // Update current tag DOM to Home
-    } else{
-    }
+    } else {}
 }
 
 function saveContent(fileContents, fileName) {

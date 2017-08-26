@@ -3,6 +3,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
 * {
     color: #fff;
     font-family: 'Raleway', sans-serif;
@@ -27,11 +28,11 @@ p {
     margin-left: auto;
     margin-right: auto;
     text-align: justify;
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
     color: #000;
     font-size: 1.4em;
-    justify-content: center ;
+    justify-content: center;
 }
 
 .sidebar {
@@ -102,8 +103,8 @@ nav a {
 }
 
 .holder {
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
     background-color: rgba(256, 256, 256, .5);
     padding: 20px;
     margin-bottom: 50px;

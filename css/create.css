@@ -1,11 +1,11 @@
 body {
-	background-image: url('../img/backgrounds/backdrop.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
+    background-image: url('../img/backgrounds/backdrop.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 * {
-	font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 .divider {
@@ -14,7 +14,7 @@ body {
 
 .main {
     position: absolute;
-	top: 40%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -47,11 +47,11 @@ body {
 }
 
 #clear {
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
 #destroy {
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
 .icon {
@@ -76,23 +76,23 @@ body {
 }
 
 .current {
-	margin-left: auto;
+    margin-left: auto;
 }
 
 .buttons {
-	margin-left: auto;
-	margin-right: 30px;
+    margin-left: auto;
+    margin-right: 30px;
 }
 
 #screen {
-	position: absolute;
-	top: 0;
-	left: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 1;
-	height: 100%;
-	width: 100%;
-	display: none;
-	background-color: rgba(0, 0, 0, .5);
+    height: 100%;
+    width: 100%;
+    display: none;
+    background-color: rgba(0, 0, 0, .5);
 }
 
 #module {
@@ -120,6 +120,7 @@ body {
 #module input {
     min-width: 250px;
 }
+
 .content-input, .content-label {
     display: inline-block;
     width: auto;
@@ -141,7 +142,7 @@ body {
 }
 
 button a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .sp-replacer.sp-light {
@@ -149,25 +150,25 @@ button a {
 }
 
 nav {
-	text-align: center;
-	word-spacing: 60px;
-	letter-spacing: 10px;
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	height: 50px;
-	left: 0;
-	color: #fff;
+    text-align: center;
+    word-spacing: 60px;
+    letter-spacing: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    left: 0;
+    color: #fff;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 nav a {
-	text-decoration: none !important;
-	text-transform: capitalize;
-	font-size: 1.1em;
+    text-decoration: none !important;
+    text-transform: capitalize;
+    font-size: 1.1em;
 }
 
 .sp-replacer.sp-light {

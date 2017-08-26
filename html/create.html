@@ -1,52 +1,54 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>SketchQuery | Create</title>
     <script src="../js/imports/jquery.min.js"></script>
     <script src="../js/imports/konva.min.js"></script>
     <link href="../css/imports/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="../css/imports/fonts/Raleway" rel="stylesheet">
-  	<link href="../css/imports/fonts/Open_Sans" rel="stylesheet">
+    <link href="../css/imports/fonts/Open_Sans" rel="stylesheet">
     <link href="../css/spectrum.css" rel="stylesheet">
     <link href="../css/create.css" rel="stylesheet">
 </head>
+
 <body>
-  <div id="screen">
-    <div id="module"></div>
-  </div>
-  <div class="main">
-      <div class="menu">
-          <div class="items">
-              <div class="box"><img title="Click to add text" class="icon" id="add-item-tx" src="../img/icons/text.png"></div>
-              <div class="box"><img title="Click to add a rectangle" class="icon" id="add-item-sq" src="../img/icons/square.png"></div>
-              <div class="box"><img title="Click to add an image from your computer" class="icon" type = "file" id="add-item-img" src="../img/icons/imgage-local.png"></div>
-              <div class="box"><img title="Click to add an image from the internet" class="icon" type = "file" id="add-item-img-url" src="../img/icons/image-web.png"></div>
-          </div>
-          <div class="current">
-              <div class="box"><button id="current_layer" title="Current working page">Home</button></div>
-              <div class="box"><button id="delete_layer_btn" style="background-color: rgba(0, 0, 0, 0); !important; margin-left: -10px !important; color: black;" onclick="removeLayer();" title="Delete current page">X</button></div>
-          </div>
-          <div class="buttons">
-              <div class="box"><button title="Click to create another page" onclick="newPage(page_num);">New Page</button></div>
-              <div class="box"><button title="Click to load a tempalte" onclick="loadTemplate();">Load Page</button></div>
-              <div class="box create"><button title="Click to create your site!" onclick="createCode();">Create Site</button></div>
-          </div>
-      </div>
-      <div class="menu">
-          <div class="items" id="pages">
-              <div class="box"><button onclick="$('#current_layer').html($('#pgn0').text());"><a id="pgn0" href="javascript:openHome(stage.children[0]);">Home</a></button></div>
-          </div>
-      </div>
-      <div class="section" id="container"></div>
-  </div>
-  <nav>
-      <a href="index.html">home</a>
-      <a href="about.html">about</a>
-      <a href="create.html">create</a>
-      <a href="contact.html">contact</a>
-      <a href="tutorial.html">tutorials</a>
-      <a href="https://github.com/jkys/sketch-query">code</a>
-  </nav>
+    <div id="screen">
+        <div id="module"></div>
+    </div>
+    <div class="main">
+        <div class="menu">
+            <div class="items">
+                <div class="box"><img title="Click to add text" class="icon" id="add-item-tx" src="../img/icons/text.png"></div>
+                <div class="box"><img title="Click to add a rectangle" class="icon" id="add-item-sq" src="../img/icons/square.png"></div>
+                <div class="box"><img title="Click to add an image from your computer" class="icon" type="file" id="add-item-img" src="../img/icons/imgage-local.png"></div>
+                <div class="box"><img title="Click to add an image from the internet" class="icon" type="file" id="add-item-img-url" src="../img/icons/image-web.png"></div>
+            </div>
+            <div class="current">
+                <div class="box"><button id="current_layer" title="Current working page">Home</button></div>
+                <div class="box"><button id="delete_layer_btn" style="background-color: rgba(0, 0, 0, 0); !important; margin-left: -10px !important; color: black;" onclick="removeLayer();" title="Delete current page">X</button></div>
+            </div>
+            <div class="buttons">
+                <div class="box"><button title="Click to create another page" onclick="newPage(page_num);">New Page</button></div>
+                <div class="box"><button title="Click to load a tempalte" onclick="loadTemplate();">Load Page</button></div>
+                <div class="box create"><button title="Click to create your site!" onclick="createCode();">Create Site</button></div>
+            </div>
+        </div>
+        <div class="menu">
+            <div class="items" id="pages">
+                <div class="box"><button onclick="$('#current_layer').html($('#pgn0').text());"><a id="pgn0" href="javascript:openHome(stage.children[0]);">Home</a></button></div>
+            </div>
+        </div>
+        <div class="section" id="container"></div>
+    </div>
+    <nav>
+        <a href="index.html">home</a>
+        <a href="about.html">about</a>
+        <a href="create.html">create</a>
+        <a href="contact.html">contact</a>
+        <a href="tutorial.html">tutorials</a>
+        <a href="https://github.com/jkys/sketch-query">code</a>
+    </nav>
 </body>
 <script src="../js/scripts/konvas.js"></script>
 <script src="../js/classes/text.js"></script>
@@ -55,4 +57,5 @@
 <script src="../js/classes/rectangle.js"></script>
 <script src="../js/scripts/script.js"></script>
 <script src="../js/imports/spectrum.js"></script>
+
 </html>
