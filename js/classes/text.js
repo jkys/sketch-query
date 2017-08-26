@@ -23,13 +23,12 @@ class Text {
         	data = '<div class="content-label"><label>Color</label></div><div class="content-input"><input type="text" id="color" name="Color" value="' + value + '"></div><script>$(\'#color\').spectrum({color: "' + value + '",preferredFormat: "hex"});$(\'#color\').show();</script>';
         }
 
-
         data += '<div class="divider"></div><div class="divider"></div>';
         return data;
     }
 
     static setCharacteristics(text, fontFamily, fontSize, color, x, y, id) {
-    	
+
     	var arr = ['Color', 'FontSize', 'FontFamily', 'Text'];
     	var arr1 = [color, fontSize, fontFamily, text];
 
